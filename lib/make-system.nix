@@ -5,10 +5,11 @@
 { self, ... } @ inputs: name:
 
 let
-  config-folder = "${self}/nixos/configurations/${name}";
+  config-folder = "${self}/nixos/configs/${name}";
   config-file = import "${config-folder}/configuration.nix" inputs;
   bootloader = "${config-folder}/bootloader.nix";
   hardware = "${config-folder}/hardware-configuration.nix";
+  users = "${config-folder}/users.nix";
 
 in inputs.nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
@@ -16,6 +17,7 @@ in inputs.nixpkgs.lib.nixosSystem {
     config-file
     bootloader
     hardware
+    users
     inputs.hyprland.nixosModules.default
     {
       networking.hostName = name;
