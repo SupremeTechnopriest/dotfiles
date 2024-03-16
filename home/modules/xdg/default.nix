@@ -71,7 +71,6 @@ _: { config, lib, pkgs, ... }:
         createDirectories = true;
 
         # Set directories
-        code = "$HOME/Code";
         desktop = "$HOME/Desktop";
         documents = "$HOME/Documents";
         download = "$HOME/Downloads";
@@ -83,6 +82,7 @@ _: { config, lib, pkgs, ... }:
 
         # Configure additional directories
         extraConfig = {
+          CODE_DIR = "$HOME/Code";
           XDG_SCREENSHOTS_DIR = "$HOME/Pictures/Screenshots";
         };
       };

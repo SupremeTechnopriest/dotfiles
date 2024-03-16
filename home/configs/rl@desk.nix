@@ -5,27 +5,27 @@
 { self, ... } : { config, lib, pkgs, ... }:
 
 {
-  home = {
 
-    # Custom modules
-    themes.enable = true;
-    btop.enable = true;
-    dunst.enable = true;
-    chrome.enable = true;
-    neovim.enable = true;
-    hyprland.enable = true;
-    fcitx.enable = true;
-    mangohud.enable = true;
-    mpv.enable = true;
-    kitty.enable = true;
-    zsh.enable = true;
-    starship.enable = true;
-    rofi.enable = true;
-    waybar.enable = true;
-    wlogout.enable = true;
-    xdg.config.enable = true;
-    gtk.config.enable = true;
-    qt.config.enable = true;
+  # Custom modules
+  themes.enable = true;
+  btop.enable = true;
+  dunst.enable = true;
+  neovim.enable = true;
+  # chrome.enable = true;
+  hyprland.enable = true;
+  # mangohud.enable = true;
+  # mpv.enable = true;
+  kitty.enable = true;
+  zsh.enable = true;
+  starship.enable = true;
+  # rofi.enable = true;
+  # waybar.enable = true;
+  # wlogout.enable = true;
+  xdg.config.enable = true;
+  gtk.config.enable = true;
+  qt.config.enable = true;
+
+  home = {
 
     # Home variables
     stateVersion = "22.11";
@@ -61,7 +61,6 @@
       # Utilities
       mpc_cli
       playerctl
-      rnix-lsp
       slurp
       wdisplays
       wl-clipboard

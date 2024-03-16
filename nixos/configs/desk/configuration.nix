@@ -61,6 +61,7 @@ inputs: { config, lib, pkgs, ... }:
     
     # List packages installed in system profile
     systemPackages = with pkgs; [
+      home-manager
       vim
       git
       git-lfs
@@ -144,7 +145,7 @@ inputs: { config, lib, pkgs, ... }:
   };
 
   # Allow swaylock to work correctly
-  security.pam.services.swaylock = {};
+  # security.pam.services.swaylock = {};
 
   # Open ports in the firewall.
   networking.firewall = {

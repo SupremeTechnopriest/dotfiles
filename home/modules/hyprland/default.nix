@@ -17,12 +17,11 @@ inputs : { config, lib, pkgs, ... }:
     # Enable and configure hyprland
     wayland.windowManager.hyprland = {
       enable = true;
-      enableNvidiaPatches = true;
       extraConfig = builtins.readFile ./hyprland.conf;
     };
 
     # Allow swaylock to lock computer
-    swaylock.enable = true;
+    # swaylock.enable = true;
 
     # Extra wayland-specific home configuration
     home = {

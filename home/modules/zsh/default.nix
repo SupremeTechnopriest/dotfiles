@@ -22,7 +22,7 @@ _: { config, lib, pkgs, ... }:
       syntaxHighlighting.enable = true;
       enableVteIntegration = true;
 
-      ohMyZsh = {
+      oh-my-zsh = {
         enable = true;
         plugins = [ 
           "git"
