@@ -12,7 +12,7 @@ in inputs.home-manager.lib.homeManagerConfiguration {
   pkgs = inputs.nixpkgs.legacyPackages.${system};
   modules = builtins.attrValues self.homeModules ++ [
     config-file
-    inputs.nur.nixosModules.nur
+    # inputs.nur.nixosModules.nur
     inputs.hyprland.homeManagerModules.default
     {
       home = {

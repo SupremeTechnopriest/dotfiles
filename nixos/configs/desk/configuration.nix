@@ -11,13 +11,13 @@ inputs: { config, lib, pkgs, ... }:
   nvidia.enable = true;
 
   # Kernel
-  boot.kernalPackages = pkgs.linuxPackages_latest;
+  # boot.kernalPackages = pkgs.linuxPackages_latest;
 
   # Timezone
   time.timeZone = "America/Los_Angeles";
 
-  # Timezone
-  networking.networkManager.enable = true;
+  # Networking 
+  networking.networkmanager.enable = true;
 
   # Locale
   i18n.defaultLocale = "en_US.UTF-8";
@@ -61,6 +61,7 @@ inputs: { config, lib, pkgs, ... }:
     
     # List packages installed in system profile
     systemPackages = with pkgs; [
+      vim
       git
       git-lfs
       curl
@@ -83,7 +84,7 @@ inputs: { config, lib, pkgs, ... }:
       gnome.adwaita-icon-theme
       bun
       zig
-    };
+    ];
   };
 
   # Configure nixpkgs

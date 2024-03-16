@@ -2,8 +2,7 @@
 # █░█ █▀ █▀▀ █▀█ █▀ 
 # █▄█ ▄█ ██▄ █▀▄ ▄█ 
 
-
-inputs : { config, lib, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 {
   users.users = {
@@ -12,6 +11,6 @@ inputs : { config, lib, pkgs, ... }:
       isNormalUser = true;
       extraGroups = [ "wheel" "networkmanager" ];
       shell = pkgs.zsh;
-    }
+    };
   };
 }
