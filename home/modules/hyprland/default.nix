@@ -45,6 +45,11 @@ inputs : { config, lib, pkgs, ... }:
         XDG_CURRENT_DESKTOP = "Hyprland";
         XDG_SESSION_DESKTOP = "Hyprland";
         XDG_SESSION_TYPE = "wayland";
+	LIBVA_DRIVER_NAME = "nvidia";
+	GBM_BACKEND = "nvidia-drm";
+	WLR_NO_HARDWARE_CURSORS = "1";
+	QT_QPA_PLATFORMTHEME = "qt6ct";
+	__GLX_VENDOR_LIBRARY_NAME = "nvidia";
       };
     };
   };

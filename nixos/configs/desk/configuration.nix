@@ -89,11 +89,7 @@ inputs: { config, lib, pkgs, ... }:
   };
 
   # Configure nixpkgs
-  nixpkgs.config = {
-
-    # Allow proprietary software
-    allowUnfree = true;
-  };
+  nixpkgs.config.allowUnfree = true;
 
   # Configure system-wide programs
   programs = {

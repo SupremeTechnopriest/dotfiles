@@ -11,16 +11,15 @@
   btop.enable = true;
   dunst.enable = true;
   neovim.enable = true;
-  # chrome.enable = true;
   hyprland.enable = true;
   # mangohud.enable = true;
   # mpv.enable = true;
   kitty.enable = true;
   zsh.enable = true;
   starship.enable = true;
-  # rofi.enable = true;
-  # waybar.enable = true;
-  # wlogout.enable = true;
+  rofi.enable = true;
+  waybar.enable = true;
+  wlogout.enable = true;
   xdg.config.enable = true;
   gtk.config.enable = true;
   qt.config.enable = true;
@@ -36,7 +35,7 @@
       # Programs to use
       MENU_CMD = "~/.config/rofi/scripts/launch-rofi.sh";
       EXIT_CMD = "~/.config/wlogout/scripts/launch-wlogout.sh";
-      BROWSER = "chrome";
+      BROWSER = "google-chrome-stable";
       EDITOR = "neovide";
       FILE = "ranger";
       FILEGUI = "nautilus";
@@ -57,6 +56,10 @@
       obsidian
       slack
       vesktop
+      postman
+      google-chrome
+      _1password
+      _1password-gui
 
       # Utilities
       mpc_cli

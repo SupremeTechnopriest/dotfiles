@@ -5,7 +5,6 @@
 inputs : {
   btop = import ./btop inputs;
   dunst = import ./dunst inputs;
-  # chrome = import ./chrome inputs;
   gtk = import ./gtk inputs;
   hyprland = import ./hyprland inputs;
   kitty = import ./kitty inputs;
