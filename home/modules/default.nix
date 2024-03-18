@@ -3,6 +3,7 @@
 # █░▀░█ █▄█ █▄▀ █▄█ █▄▄ ██▄ ▄█ 
 
 inputs : {
+  fonts = import ./fonts inputs;
   btop = import ./btop inputs;
   dunst = import ./dunst inputs;
   gtk = import ./gtk inputs;

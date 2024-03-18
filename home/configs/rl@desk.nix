@@ -7,6 +7,7 @@
 {
 
   # Custom modules
+  fonts.enable = true;
   themes.enable = true;
   btop.enable = true;
   dunst.enable = true;

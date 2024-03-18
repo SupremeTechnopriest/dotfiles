@@ -117,6 +117,13 @@ in {
       };
     }]))
 
+    # Install kvantum themes
+    (lib.mkMerge (lib.lists.forEach theme-list (theme: {
+      xdg.configFile."Kvantum/${theme.name}" = {
+        source = ./config/kvantum/${theme.name};
+      };
+    })))
+
     # Enable css themes
     (add-themes "css" ".css")
 
