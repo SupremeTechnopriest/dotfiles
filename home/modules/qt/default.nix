@@ -21,7 +21,7 @@ _: { config, lib, pkgs, ... }:
       QT_AUTO_SCREEN_SCALE_FACTOR = 1;
     };
 
-    # Configure qt5
+    # Configure qt6
     # Note that we use .text here so that theming can append to it
     xdg.configFile."qt6ct/qt6ct.conf".text = builtins.readFile ./qt6ct.conf;
   };

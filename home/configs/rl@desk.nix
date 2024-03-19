@@ -28,7 +28,7 @@
   home = {
 
     # Home variables
-    stateVersion = "22.11";
+    stateVersion = "23.11";
 
     # Set environment variables
     sessionVariables = {

@@ -5,8 +5,8 @@
 
   "name": "full",
   "layer": "top",
-  "position": "bottom",
-  "height": 60,
+  "position": "top",
+  "height": 31,
   "exclusive": true,
   "passthrough": false,
   "gtk-layer-shell": true,

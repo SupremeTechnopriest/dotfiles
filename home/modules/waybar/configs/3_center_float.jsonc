@@ -6,7 +6,7 @@
   "name": "float",
   "layer": "top",
   "position": "bottom",
-  "height": 60,
+  "height": 31,
   "exclusive": false,
   "passthrough": false,
   "gtk-layer-shell": true,

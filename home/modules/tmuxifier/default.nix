@@ -12,5 +12,10 @@ _: { config, lib, pkgs, ... }:
   # Install tmuxifier if desired
   config = lib.mkIf config.tmuxifier.enable {
 
+    # Configure tmuxifier
+    programs.tmuxifier = {
+      enable = true;
+    };
+
   };
 }

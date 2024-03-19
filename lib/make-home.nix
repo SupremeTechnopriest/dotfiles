@@ -14,6 +14,7 @@ in inputs.home-manager.lib.homeManagerConfiguration {
     config-file
     # inputs.nur.nixosModules.nur
     inputs.hyprland.homeManagerModules.default
+    inputs.nixvim.homeManagerModules.nixvim
     {
       home = {
         username = user;

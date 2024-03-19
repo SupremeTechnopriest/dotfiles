@@ -5,13 +5,11 @@
 
   "name": "float",
   "layer": "top",
-  "position": "bottom",
-  "height": 60,
+  "position": "top",
+  "height": 31,
   "exclusive": false,
   "passthrough": false,
   "gtk-layer-shell": true,
-  "margin-right": 10,
-  "margin-bottom": 20,
 
   /////////////
   // Modules //

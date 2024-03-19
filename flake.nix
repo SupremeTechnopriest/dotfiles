@@ -18,6 +18,12 @@
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-portal.url = "github:hyprwm/xdg-desktop-portal-hyprland";
 
+    # Nixvim
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
   outputs = inputs: {
 

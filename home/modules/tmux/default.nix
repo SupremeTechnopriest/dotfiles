@@ -12,5 +12,12 @@ _: { config, lib, pkgs, ... }:
   # Install tmux if desired
   config = lib.mkIf config.tmux.enable {
 
+    programs.tmux = {
+    
+      # Configure tmux
+      enable = true;
+      extraConfig = "";
+    };
+
   };
 }
