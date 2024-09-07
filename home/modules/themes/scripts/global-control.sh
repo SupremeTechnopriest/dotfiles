@@ -8,11 +8,8 @@ lookup_theme_data() {
   awk -v search="$search_string" -F '|' '$1 == search { print $'"$field_number"' }' "$ThemeData"
 }
 
-
 # Configuration directory
-ConfDir="$HOME/.config"
-ThemeDir="$ConfDir/themes"
-mkdir -p $ThemeDir
+ThemeDir="$HOME/.config/themes"
 
 # Ensure that themes can be switched
 source $ThemeDir/scripts/initialise.sh
@@ -20,8 +17,8 @@ source $ThemeDir/scripts/initialise.sh
 # Wallpaper var
 ThemeCtl="$control_file"
 ThemeData="$ThemeDir/theme-data.conf"
-cache_dir="$HOME/.cache/themes"
-mkdir -p $cache_dir
+CacheDir="$HOME/.cache/themes"
+mkdir -p $CacheDir
 
 
 export current_theme=$(grep '^1|' $ThemeCtl | awk -F '|' '{print $2}')

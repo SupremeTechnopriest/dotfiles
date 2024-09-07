@@ -18,6 +18,7 @@
   kitty.enable = true;
   zsh.enable = true;
   starship.enable = true;
+  swaylock.enable = true;
   rofi.enable = true;
   waybar.enable = true;
   wlogout.enable = true;
@@ -35,6 +36,8 @@
 
       # Programs to use
       MENU_CMD = "~/.config/rofi/scripts/launch-rofi.sh";
+      THEME_SELECT_CMD = "~/.config/rofi/scripts/themeselect-rofi.sh";
+      WALL_SELECT_CMD = "~/.config/rofi/scripts/wallselect-rofi.sh";
       EXIT_CMD = "~/.config/wlogout/scripts/launch-wlogout.sh";
       BROWSER = "google-chrome-stable";
       EDITOR = "neovide";

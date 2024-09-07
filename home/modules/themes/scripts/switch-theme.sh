@@ -69,7 +69,7 @@ if [ `cat $ThemeCtl | awk -F '|' -v thm=$current_theme '{if($2==thm) print$2}' |
 else
   echo "Selected theme: $current_theme"
   sed -i "s/^1/0/g" $ThemeCtl
-  awk -F '|' -v thm=$current_theme '{OFS=FS} {if($2==thm) $1=1; print$0}' $ThemeCtl > "$cache_dir/tmp" && mv "$cache_dir/tmp" $ThemeCtl
+  awk -F '|' -v thm=$current_theme '{OFS=FS} {if($2==thm) $1=1; print$0}' $ThemeCtl > "$CacheDir/tmp" && mv "$CacheDir/tmp" $ThemeCtl
 fi
 
 
@@ -82,8 +82,8 @@ getWall=`grep '^1|' $ThemeCtl | cut -d '|' -f 3`
 getWall=`eval echo $getWall`
 getName=`basename $getWall`
 ln -fs $getWall $ThemeDir/wall.set
-ln -fs $cache_dir/${current_theme}/${getName}.rofi $ThemeDir/wall.rofi
-ln -fs $cache_dir/${current_theme}/${getName}.blur $ThemeDir/wall.blur
+ln -fs $CacheDir/${current_theme}/${getName}.rofi $ThemeDir/wall.rofi
+ln -fs $CacheDir/${current_theme}/${getName}.blur $ThemeDir/wall.blur
 ${ScrDir}/switch-wallpaper.sh
 
 if [ $? -ne 0 ] ; then

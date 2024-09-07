@@ -14,7 +14,10 @@ _: { config, lib, pkgs, ... }:
     };
 
     # Configure rofi
-    xdg.configFile."rofi/config.rasi".text = builtins.readFile ./config.rasi;
+    xdg.configFile."rofi/launcher.rasi".text = builtins.readFile ./launcher.rasi;
+    xdg.configFile."rofi/quickapps.rasi".text = builtins.readFile ./quickapps.rasi;
+    xdg.configFile."rofi/themeselect.rasi".text = builtins.readFile ./themeselect.rasi;
+    xdg.configFile."rofi/screenshot.rasi".text = builtins.readFile ./screenshot.rasi;
     xdg.configFile."rofi/extra-config.rasi".text = '''';
 
     # Copy scripts folder

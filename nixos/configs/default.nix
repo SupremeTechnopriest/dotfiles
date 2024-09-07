@@ -3,5 +3,5 @@
 # █▄█ ▄█   █▄▄ █▄█ █░▀█ █▀░ █ █▄█ ▄█ 
 
 { self, ... } @ inputs: {
-  desk = self.lib.mkSystem "desk";
+  dsk = self.lib.mkSystem "dsk";
 }

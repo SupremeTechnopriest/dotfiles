@@ -256,7 +256,7 @@
 
 
   "custom/bar-switch": {
-    "format": "󱂩{}",
+    "format": "󱂩 {}",
     "exec": "echo ; echo 󱂩 Switch between bars",
     "on-click": "~/.config/waybar/scripts/switch-waybar.sh -n",
     "on-click-right": "~/.config/waybar/scripts/switch-waybar.sh -p",
@@ -266,7 +266,7 @@
   },
 
   "custom/power": {
-    "format": "{}",
+    "format": " {}",
     "exec": "echo ; echo  Logout",
     "on-click": "$EXIT_CMD",
     "on-click-right": "$MENU_CMD -show drun",
@@ -275,7 +275,7 @@
   },
 
   "custom/theme-switch": {
-    "format": "{}",
+    "format": "󰟡 {}",
     "exec": "echo ; echo 󰟡 Switch themes",
     "on-click": "~/.config/themes/scripts/switch-theme.sh -n",
     "on-click-right": "~/.config/themes/scripts/switch-theme.sh -p",
@@ -285,7 +285,7 @@
   },
 
   "custom/wallpaper-switch": {
-    "format": "{}",
+    "format": "󰆊 {}",
     "exec": "echo ; echo 󰆊 Switch wallpapers",
     "on-click": "~/.config/themes/scripts/switch-wallpaper.sh -n",
     "on-click-right": "~/.config/themes/scripts/switch-wallpaper.sh -p",

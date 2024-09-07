@@ -13,6 +13,11 @@ inputs : { config, lib, pkgs, ... }:
 
     # Add scripts
     xdg.configFile."hypr/scripts".source = ./scripts;
+    xdg.configFile."hypr/animations.conf".source = ./animations.conf;
+    xdg.configFile."hypr/keybindings.conf".source = ./keybindings.conf;
+    xdg.configFile."hypr/monitors.conf".source = ./monitors.conf;
+    xdg.configFile."hypr/nvidia.conf".source = ./nvidia.conf;
+    xdg.configFile."hypr/windowrules.conf".source = ./windowrules.conf;
 
     # Enable and configure hyprland
     wayland.windowManager.hyprland = {

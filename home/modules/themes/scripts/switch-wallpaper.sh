@@ -4,6 +4,33 @@
 ScrDir=`dirname $(realpath $0)`
 source ${ScrDir}/global-control.sh
 
+ctl_line=`grep '^1|' $ThemeCtl`
+current_theme=`echo $ctl_line | cut -d '|' -f 2`
+full_path=`echo $ctl_line | cut -d '|' -f 3`
+full_path=`eval echo $full_path`
+wall_name=`echo $full_path | awk -F '/' '{print $NF}'`
+wall_path=`echo $full_path | sed "s/\/$wall_name//g"`
+
+if [ ! -f  $wall_path/$wall_name ] ; then
+  if [ -d $ThemeDir/wallpapers/$current_theme ] ; then
+    wall_path="$ThemeDir/wallpapers/$current_theme"
+    full_path=`ls $wall_path/* | head -1`
+  else
+    echo "ERROR: wallpaper $wall_path/$wall_name not found..."
+    exit 1
+  fi
+fi
+
+wall_list=`ls $wall_path/*`
+
+wall_set="$ThemeDir/wall.set"
+wall_blr="$ThemeDir/wall.blur"
+wall_rfi="$ThemeDir/wall.rofi"
+
+if [  `echo $ctl_line | wc -w` -ne "1" ] ; then
+  echo "ERROR : $ThemeCtl Unable to fetch theme..."
+  exit 1
+fi
 
 # Define functions
 
@@ -11,44 +38,44 @@ Wall_Update()
 {
   local x_wall=$1
   local x_update=${x_wall/$HOME/"~"}
-  cacheImg=`echo $x_wall | awk -F '/' '{print $NF}'`
+  cache_img=`echo $x_wall | awk -F '/' '{print $NF}'`
 
-  if [ ! -d ${cache_dir}/${curTheme} ] ; then
-    mkdir -p ${cache_dir}/${curTheme}
+  if [ ! -d ${CacheDir}/${current_theme} ] ; then
+    mkdir -p ${CacheDir}/${current_theme}
   fi
 
-  if [ ! -f "${cache_dir}/${curTheme}/${cacheImg}" ] ; then
-    convert -strip $x_wall -thumbnail 500x500^ -gravity center -extent 500x500 ${cache_dir}/${curTheme}/${cacheImg}
+  if [ ! -f "${CacheDir}/${current_theme}/${cache_img}" ] ; then
+    convert -strip $x_wall -thumbnail 500x500^ -gravity center -extent 500x500 ${CacheDir}/${current_theme}/${cache_img}
   fi
 
-  if [ ! -f "${cache_dir}/${curTheme}/${cacheImg}.rofi" ] ; then
-    convert -strip -resize 2000 -gravity center -extent 2000 -quality 90 $x_wall ${cache_dir}/${curTheme}/${cacheImg}.rofi
+  if [ ! -f "${CacheDir}/${current_theme}/${cache_img}.rofi" ] ; then
+    convert -strip -resize 2000 -gravity center -extent 2000 -quality 90 $x_wall ${CacheDir}/${current_theme}/${cache_img}.rofi
   fi
 
-  if [ ! -f "${cache_dir}/${curTheme}/${cacheImg}.blur" ] ; then
-    convert -strip -scale 10% -blur 0x3 -resize 100% $x_wall ${cache_dir}/${curTheme}/${cacheImg}.blur
+  if [ ! -f "${CacheDir}/${current_theme}/${cache_img}.blur" ] ; then
+    convert -strip -scale 10% -blur 0x3 -resize 100% $x_wall ${CacheDir}/${current_theme}/${cache_img}.blur
   fi
 
-  sed -i "/^1|/c\1|${curTheme}|${x_update}" $ctlFile
-  ln -fs $x_wall $wallSet
-  ln -fs ${cache_dir}/${curTheme}/${cacheImg}.rofi $wallRfi
-  ln -fs ${cache_dir}/${curTheme}/${cacheImg}.blur $wallBlr
+  sed -i "/^1|/c\1|${current_theme}|${x_update}" $ThemeCtl
+  ln -fs $x_wall $wall_set
+  ln -fs ${CacheDir}/${current_theme}/${cache_img}.rofi $wall_rfi
+  ln -fs ${CacheDir}/${current_theme}/${cache_img}.blur $wall_blr
 }
 
 Wall_Change()
 {
   local x_switch=$1
 
-  for (( i=0 ; i<${#Wallist[@]} ; i++ ))
+  for (( i=0 ; i<${#wall_list[@]} ; i++ ))
   do
-    if [ ${Wallist[i]} == ${fullPath} ] ; then
+    if [ ${wall_list[i]} == ${full_path} ] ; then
 
       if [ $x_switch == 'n' ] ; then
-        nextIndex=$(( (i + 1) % ${#Wallist[@]} ))
+        next_index=$(( (i + 1) % ${#wall_list[@]} ))
       elif [ $x_switch == 'p' ] ; then
-        nextIndex=$(( i - 1 ))
+        next_index=$(( i - 1 ))
       fi
-      Wall_Update ${Wallist[nextIndex]}
+      Wall_Update ${wall_list[next_index]}
       break
     fi
   done
@@ -60,7 +87,7 @@ Wall_Set()
     xtrans="grow"
   fi
 
-  swww img $wallSet \
+  swww img $wall_set \
     --transition-bezier .43,1.19,1,.4 \
     --transition-type $xtrans \
     --transition-duration 0.7 \
@@ -69,43 +96,7 @@ Wall_Set()
     --transition-pos "$( hyprctl cursorpos )"
 }
 
-
-# Set variables
-
-ScrDir=`dirname $(realpath $0)`
-source $ScrDir/global-control.sh
-ctlFile="$ThemeCtl"
-wallSet="$ThemeDir/wall.set"
-wallBlr="$ThemeDir/wall.blur"
-wallRfi="$ThemeDir/wall.rofi"
-ctlLine=`grep '^1|' $ctlFile`
-
-if [  `echo $ctlLine | wc -w` -ne "1" ] ; then
-  echo "ERROR : $ctlFile Unable to fetch theme..."
-  exit 1
-fi
-
-curTheme=`echo $ctlLine | cut -d '|' -f 2`
-fullPath=`echo $ctlLine | cut -d '|' -f 3`
-fullPath=`eval echo $fullPath`
-wallName=`echo $fullPath | awk -F '/' '{print $NF}'`
-wallPath=`echo $fullPath | sed "s/\/$wallName//g"`
-
-if [ ! -f  $wallPath/$wallName ] ; then
-  if [ -d $ThemeDir/wallpapers/$curTheme ] ; then
-    wallPath="$ThemeDir/wallpapers/$curTheme"
-    fullPath=`ls $wallPath/* | head -1`
-  else
-    echo "ERROR: wallpaper $wallPath/$wallName not found..."
-    exit 1
-  fi
-fi
-
-Wallist=(`ls $wallPath/*`)
-
-
 # Evaluate options
-
 while getopts "nps" option ; do
   case $option in
     n ) # Set next wallpaper
@@ -117,6 +108,7 @@ while getopts "nps" option ; do
     s ) # Set input wallpaper
       shift $((OPTIND -1))
       if [ -f $1 ] ; then
+        echo $1
         Wall_Update $1
       fi ;;
     * ) # Invalid option
@@ -129,7 +121,6 @@ done
 
 
 # Check swww daemon and set wall
-
 swww query
 if [ $? -eq 1 ] ; then
   swww init
@@ -137,7 +128,7 @@ fi
 
 
 if [ "$#" -eq 0 ]; then
-  Wall_Update $fullPath
+  Wall_Update $full_path
 fi
 
 Wall_Set

@@ -15,6 +15,7 @@ inputs : {
   qt = import ./qt inputs;
   rofi = import ./rofi inputs;
   starship = import ./starship inputs;
+  swaylock = import ./swaylock inputs;
   themes = import ./themes inputs;
   waybar = import ./waybar inputs;
   wlogout = import ./wlogout inputs;

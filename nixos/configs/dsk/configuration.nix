@@ -54,7 +54,8 @@ inputs: { config, lib, pkgs, ... }:
   };
 
   # Sound 
-  sound.enable = true;
+  sound.enable = false;
+  hardware.pulseaudio.enable = false;
 
   # Environment
   environment = {
@@ -81,6 +82,7 @@ inputs: { config, lib, pkgs, ... }:
       neofetch
       ranger
       libnotify
+      qjackctl
       gnome.gnome-system-monitor
       gnome.nautilus
       gnome.adwaita-icon-theme
@@ -91,6 +93,9 @@ inputs: { config, lib, pkgs, ... }:
 
   # Configure nixpkgs
   nixpkgs.config.allowUnfree = true;
+
+  # Configure security
+  security.rtkit.enable = true;
 
   # Configure system-wide programs
   programs = {
@@ -122,7 +127,10 @@ inputs: { config, lib, pkgs, ... }:
       enable = true;
       audio.enable = true;
       pulse.enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
       wireplumber.enable = true;
+      jack.enable = true;
     };
 
     # Enable CUPS to print documents

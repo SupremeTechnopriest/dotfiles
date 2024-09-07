@@ -53,24 +53,49 @@ _: { config, lib, pkgs, ... }:
       };
 
       colorschemes.catppuccin.enable = true;
-      colorschemes.catppuccin.flavour = "latte";
+      # colorschemes.catppuccin.flavour = "latte";
       colorschemes.catppuccin.flavour = "mocha";
 
-      colorschemes.rose-pine.enable = true;
-      colorschemes.tokyonight.enable = true;
-      colorschemes.gruvbox.enable = true;
+      # colorschemes.rose-pine.enable = true;
+      # colorschemes.tokyonight.enable = true;
+      # colorschemes.gruvbox.enable = true;
 
     };
      
-    imports = [
-
-      # Dashboard splash screen
-      ./plugins/dashboard
-
-      # File browsing
-      ./plugins/neo-tree
-
-    ];
-
   };
+
+  imports = [
+
+    # Dashboard splash screen
+    ./plugins/dashboard
+
+    # File browsing
+    ./plugins/neo-tree
+
+    # Tabs
+    ./plugins/barbar
+
+    # Auto completions
+    ./plugins/cmp
+
+    # Comments
+    ./plugins/comment
+
+    # Status line
+    ./plugins/lualine
+
+    # Cursor line
+    ./plugins/cursorline
+
+    # Split manager
+    ./plugins/smart-splits
+
+    # Key hints
+    ./plugins/which-key
+
+    # Command auto complete
+    ./plugins/wilder
+
+  ];
+
 }
