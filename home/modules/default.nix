@@ -21,4 +21,6 @@ inputs : {
   wlogout = import ./wlogout inputs;
   xdg = import ./xdg inputs;
   zsh = import ./zsh inputs;
+  sonarr = import ./sonarr inputs;
+  radarr = import ./radarr inputs;
 }

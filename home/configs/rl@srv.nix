@@ -34,6 +34,7 @@
       discordo
       neofetch
       _1password
+    
     ];
   };
   
