@@ -19,4 +19,4 @@ _: { config, lib, pkgs, ... }:
       openFirewall = true;
     };
   };
-};
+}
