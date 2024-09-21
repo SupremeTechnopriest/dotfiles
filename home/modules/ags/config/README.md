@@ -1,15 +1,15 @@
-# dotfiles
 
-To install dependencies:
+# Starter Config
 
-```bash
-bun install
+if suggestions don't work, first make sure
+you have TypeScript LSP working in your editor
+
+if you do not want typechecking only suggestions
+
+```json
+// tsconfig.json
+"checkJs": false
 ```
 
-To run:
-
-```bash
-bun run main.ts
-```
-
-This project was created using `bun init` in bun v1.1.17. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+types are symlinked to:
+/home/rl/.local/share/com.github.Aylur.ags/types

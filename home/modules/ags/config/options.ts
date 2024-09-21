@@ -12,6 +12,14 @@ type Theme =
   | 'catpuccinMocha'
   | 'catpuccinLatte'
 
+export enum Themes {
+  MONOKAI,
+  ROSE_PINE,
+  TOKYO_NIGHT,
+  CATPUCCIN_MOCHA,
+  CATPUCCIN_LATTE
+}
+
 export enum FullscreenOption {
   NEVER,
   ALWAYS,
@@ -20,7 +28,7 @@ export enum FullscreenOption {
 
 export const options = mkOptions(OPTIONS, {
   appearance: {
-    screenRounding: opt<FullscreenOption>(FullscreenOption.NOT_FULLSCREEN)
+    screenRounding: opt<FullscreenOption>(FullscreenOption.ALWAYS)
   },
 
   theme: {
@@ -140,7 +148,7 @@ export const options = mkOptions(OPTIONS, {
 
   font: {
     size: opt(10),
-    name: opt('Dank Mono Nerd Font')
+    name: opt('DankMono Nerd Font')
   },
 
   transition: opt(200),
@@ -163,13 +171,16 @@ export const options = mkOptions(OPTIONS, {
     corners: opt(50),
     transparent: opt(false),
     layout: {
-      start: opt<Array<BarWidget>>(['expander']),
-      center: opt<Array<BarWidget>>(['expander', 'screengroup']),
-      end: opt<Array<BarWidget>>(['theme', 'wallpaper', 'date', 'indicators'])
+      start: opt<Array<BarWidget>>(['screengroup']),
+      center: opt<Array<BarWidget>>(['workspaces', 'date']),
+      end: opt<Array<BarWidget>>(['colorpicker', 'wallpaper'])
     },
 
     date: {
-      format: opt('%I:%M • %A, %m/%d'),
+      format: {
+        time: opt('%I:%M'),
+        date: opt('%A, %m/%d')
+      },
       action: opt(() => App.toggleWindow('datemenu'))
     }
   },

@@ -1,4 +1,5 @@
 import { PanelButton } from '@/widget/bar/PanelButton'
+import { icon } from '@/lib/utils'
 import { icons } from '@/lib/icons'
 import { asusctl } from '@/service/asusctl'
 
@@ -13,9 +14,9 @@ const ProfileIndicator = () => {
     ? asusctl.bind('profile').as((p) => p !== 'Balanced')
     : powerprof.bind('active_profile').as((p) => p !== 'balanced')
 
-  const icon = asusctl.available
+  const icon = icon(asusctl.available
     ? asusctl.bind('profile').as((p) => icons.asusctl.profile[p])
-    : powerprof.bind('active_profile').as((p) => icons.powerprofile[p])
+    : powerprof.bind('active_profile').as((p) => icons.powerprofile[p]))
 
   return Widget.Icon({ visible, icon })
 }
@@ -31,7 +32,7 @@ const ModeIndicator = () => {
 
   return Widget.Icon({
     visible: asusctl.bind('mode').as((m) => m !== 'Hybrid'),
-    icon: asusctl.bind('mode').as((m) => icons.asusctl.mode[m])
+    icon: asusctl.bind('mode').as((m) => icon(icons.asusctl.mode[m]))
   })
 }
 
@@ -58,7 +59,7 @@ const MicrophoneIndicator = () =>
 const DNDIndicator = () =>
   Widget.Icon({
     visible: notifications.bind('dnd'),
-    icon: icons.notifications.silent
+    icon: icon(icons.notifications.silent)
   })
 
 const BluetoothIndicator = () =>
@@ -67,7 +68,7 @@ const BluetoothIndicator = () =>
     passThrough: true,
     visible: bluetooth.bind('enabled'),
     child: Widget.Icon({
-      icon: icons.bluetooth.enabled
+      icon: icon(icons.bluetooth.enabled)
     }),
     overlay: Widget.Label({
       hpack: 'end',

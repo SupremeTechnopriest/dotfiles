@@ -87,6 +87,7 @@ inputs: { config, lib, pkgs, ... }:
       gnome.gnome-system-monitor
       gnome.nautilus
       gnome.adwaita-icon-theme
+      nodejs_20
       bun
       zig
     ];

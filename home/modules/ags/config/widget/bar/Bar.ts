@@ -2,13 +2,13 @@ import { options } from '@/options'
 
 import { Workspaces } from '@/widget/bar/modules/Workspaces'
 import { Date } from '@/widget/bar/modules/Date'
-import { ThemeCycle } from '@/widget/bar/modules/Theme'
+// import { ThemeCycle } from '@/widget/bar/modules/Theme'
 import { WallpaperCycle } from '@/widget/bar/modules/Wallpaper'
 import { ScreenGroup } from '@/widget/bar/modules/ScreenGroup'
 import { ColorPicker } from '@/widget/bar/modules/ColorPicker'
-import { ScreenRecord } from '@/widget/bar/modules/ScreenRecord'
-import { ScreenShot } from '@/widget/bar/modules/ScreenShot'
-import { Indicators } from '@/widget/bar/modules/Indicators'
+// import { ScreenRecord } from '@/widget/bar/modules/ScreenRecord'
+// import { ScreenShot } from '@/widget/bar/modules/ScreenShot'
+// import { Indicators } from '@/widget/bar/modules/Indicators'
 
 const {
   transparent,
@@ -21,13 +21,13 @@ export type BarWidget = keyof typeof widget
 const widget = {
   workspaces: Workspaces,
   date: Date,
-  theme: ThemeCycle,
+  // theme: ThemeCycle,
   wallpaper: WallpaperCycle,
   screengroup: ScreenGroup,
   colorpicker: ColorPicker,
-  screenrecord: ScreenRecord,
-  screenshot: ScreenShot,
-  indicators: Indicators,
+  // screenrecord: ScreenRecord,
+  // screenshot: ScreenShot,
+  // indicators: Indicators,
   expander: () => Widget.Box({ expand: true })
 }
 
@@ -51,6 +51,7 @@ export const Bar = (monitor: number) =>
       }),
       endWidget: Widget.Box({
         hexpand: true,
+        hpack: 'end',
         children: end.bind().as((e) => e.map((w) => widget[w]()))
       })
     }),

@@ -3,14 +3,31 @@ import { clock } from '@/lib/variables'
 import { PanelButton } from '@/widget/bar/PanelButton'
 
 const { format, action } = options.bar.date
-const time = Utils.derive([clock, format], (c, f) => c.format(f) || '')
+const time = Utils.derive([clock, format.time], (c, f) => c.format(f) || '')
+const date = Utils.derive([clock, format.date], (c, f) => c.format(f) || '')
 
 export const Date = () =>
   PanelButton({
     window: 'datemenu',
     on_clicked: action.bind(),
-    child: Widget.Label({
-      justification: 'right',
-      label: time.bind()
+    child: Widget.Box({
+      children: [
+        Widget.Label({
+          class_name: 'text-bold text-normal',
+          justification: 'right',
+          label: time.bind()
+        }),
+
+        Widget.Label({
+          css: 'margin: 0 0.5rem',
+          className: 'text-muted',
+          label: '•'
+        }),
+
+        Widget.Label({
+          justification: 'right',
+          label: date.bind()
+        })
+      ]
     })
   })

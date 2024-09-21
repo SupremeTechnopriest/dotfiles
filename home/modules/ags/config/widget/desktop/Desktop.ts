@@ -1,7 +1,4 @@
 import { options } from '@/options'
-const mpris = await Service.import('mpris')
-
-const pref = () => options.bar.media.preferred.value
 
 export default (monitor: number) =>
   Widget.Window({
@@ -12,7 +9,7 @@ export default (monitor: number) =>
     anchor: ['top', 'bottom', 'left', 'right'],
     child: Widget.Box({
       expand: true,
-      css: options.theme.dark.primary.bg.bind().as(
+      css: options.theme[options.theme.scheme.value].base.bind().as(
         (c) => `
             transition: 500ms;
             background-color: ${c}`
@@ -25,7 +22,6 @@ export default (monitor: number) =>
         setup: (self) =>
           self.hook(mpris, () => {
             const img = mpris.getPlayer(pref())!.cover_path
-            matugen('image', img)
             Utils.timeout(
               500,
               () =>
