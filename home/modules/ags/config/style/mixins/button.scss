@@ -1,0 +1,73 @@
+@mixin button-focus() {
+  box-shadow: inset 0 0 0 $border-width $border-color;
+  background-color: $overlay;
+  color: $primary;
+}
+
+@mixin button-hover() {
+  box-shadow: inset 0 0 0 $border-width $border-color;
+  background-color: $overlay;
+  color: $primary;
+}
+
+@mixin button-active() {
+  box-shadow: inset 0 0 0 $border-width $border-color;
+  background-color: $primary;
+  color: $primary;
+}
+
+@mixin button-disabled() {
+  box-shadow: none;
+  background-color: transparent;
+  color: transparentize($text, 0.7);
+}
+
+@mixin button(
+  $flat: false,
+  $reactive: true,
+  $radius: $radius,
+  $focusable: true
+) {
+  all: unset;
+  transition: $transition;
+  border-radius: $radius;
+  color: $subtle;
+
+  @if $flat {
+    background-color: transparent;
+    background-image: none;
+    box-shadow: none;
+  } @else {
+    background-color: $overlay;
+    box-shadow: inset 0 0 0 $border-width $border-color;
+  }
+
+  @if $reactive {
+    @if $focusable {
+      &:focus {
+        @include button-focus;
+      }
+    }
+
+    &:hover {
+      @include button-hover;
+    }
+
+    &:active,
+    &.on,
+    &.active,
+    &:checked {
+      @include button-active;
+
+      &:hover {
+        box-shadow:
+          inset 0 0 0 $border-width $border-color,
+          inset 0 0 0 99px $overlay;
+      }
+    }
+  }
+
+  &:disabled {
+    @include button-disabled;
+  }
+}

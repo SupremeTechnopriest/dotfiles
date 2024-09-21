@@ -37,22 +37,22 @@ _: { config, lib, pkgs, ... }:
       # Configure shell aliases for zsh
       shellAliases = {
       	# Nixos switch
-      	nhmswitch = "home-manager switch --option eval-cache false --show-trace --flake $1";
-	nixswitch = "sudo nixos-rebuild switch --flake $1";
-	# File browsing
-	cat = "bat";
-	ls = "eza";
-	ll = "eza -alh";
-	lf = "ranger";
-	tree = "eza --tree";
-	z = "zoxide";
-	zz = "z -";
-	# Directory Shortcuts
-	cdp = "cd ~/Code/projects";
-	emp = "cd ~/Code/projects/edgemesh";
-	# SSH
-	rdsk = "ssh rl@dsk.local.com";
-	rsrv = "ssh rl@srv.local.com";
+      	hmswitch = "home-manager switch --option eval-cache false --show-trace --flake $1";
+        nixswitch = "sudo nixos-rebuild switch --flake $1";
+        # File browsing
+        cat = "bat";
+        ls = "eza";
+        ll = "eza -alh";
+        lf = "ranger";
+        tree = "eza --tree";
+        z = "zoxide";
+        zz = "z -";
+        # Directory Shortcuts
+        cdp = "cd ~/Code/projects";
+        emp = "cd ~/Code/projects/edgemesh";
+        # SSH
+        rdsk = "ssh rl@dsk.local.com";
+        rsrv = "ssh rl@srv.local.com";
       };
 
     };

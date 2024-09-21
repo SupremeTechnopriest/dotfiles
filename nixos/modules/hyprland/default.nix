@@ -22,7 +22,7 @@ inputs : { config, lib, pkgs, ... }:
     # and adding a proper Desktop Entry to your Display Manager
     programs.hyprland = {
       enable = true;
-      portalPackage = inputs.hyprland-portal.packages."x86_64-linux".xdg-desktop-portal-hyprland;
+      portalPackage = inputs.hyprland-portal.packages."${pkgs.stdenv.hostPlatform.system}".xdg-desktop-portal-hyprland;
     };
   };
 }

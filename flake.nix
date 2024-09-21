@@ -18,6 +18,10 @@
     hyprland.url = "github:hyprwm/Hyprland";
     hyprland-portal.url = "github:hyprwm/xdg-desktop-portal-hyprland";
 
+    # Ags
+    ags.url = "github:Aylur/ags";
+    astal.url = "github:Aylur/astal";
+
     # Nixvim
     nixvim = {
       url = "github:nix-community/nixvim";

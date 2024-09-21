@@ -5,56 +5,55 @@
 inputs : { config, lib, pkgs, ... }:
 
 {
-  # Add options for hyprland, a wayland window manager
-  options.hyprland.enable = lib.mkEnableOption "hyprland";
+  # Add options for hyprland, a Wayland window manager
+  options.hyprland = {
+    enable = lib.mkEnableOption "Enable Hyprland, a Wayland window manager.";
+    monitors.enable = lib.mkEnableOption "Enable monitor configuration for Hyprland.";
+    nvidia.enable = lib.mkEnableOption "Enable Nvidia configuration for Hyprland.";
+  };
 
   # Enable hyprland if desired
   config = lib.mkIf config.hyprland.enable {
 
-    # Add scripts
+    # Add scripts and configuration files
     xdg.configFile."hypr/scripts".source = ./scripts;
     xdg.configFile."hypr/animations.conf".source = ./animations.conf;
     xdg.configFile."hypr/keybindings.conf".source = ./keybindings.conf;
-    xdg.configFile."hypr/monitors.conf".source = ./monitors.conf;
-    xdg.configFile."hypr/nvidia.conf".source = ./nvidia.conf;
     xdg.configFile."hypr/windowrules.conf".source = ./windowrules.conf;
 
-    # Enable and configure hyprland
+    # Conditional monitor and Nvidia configurations
+    xdg.configFile."hypr/monitors.conf".text = if config.hyprland.monitors.enable
+      then builtins.readFile ./monitors.conf
+      else "";
+
+    xdg.configFile."hypr/nvidia.conf".text = if config.hyprland.nvidia.enable
+      then builtins.readFile ./nvidia.conf
+      else "";
+
+    # Enable and configure Hyprland
     wayland.windowManager.hyprland = {
       enable = true;
       extraConfig = builtins.readFile ./hyprland.conf;
     };
 
-    # Allow swaylock to lock computer
-    # swaylock.enable = true;
+    # Uncomment to enable swaylock (for locking the screen)
+    # services.swaylock.enable = true;
 
-    # Extra wayland-specific home configuration
+    # Wayland-specific configuration
     home = {
-
-      # Extra packages accompanying hyprland
       packages = with pkgs; [
-
-        # Install grimshot for screenshotting with hyprland
-        grim
-        sway-contrib.grimshot
-
-        # Enable explicit use of xwayland compatibility layer
-        xwayland
-
-        # Colour picker
-        hyprpicker
+        # Uncomment to add additional packages
+        # grim
+        # sway-contrib.grimshot
+        # xwayland
+        # hyprpicker
       ];
 
-      # Specify desktop environment environment variables
+      # Set desktop environment variables
       sessionVariables = {
         XDG_CURRENT_DESKTOP = "Hyprland";
         XDG_SESSION_DESKTOP = "Hyprland";
         XDG_SESSION_TYPE = "wayland";
-	LIBVA_DRIVER_NAME = "nvidia";
-	GBM_BACKEND = "nvidia-drm";
-	WLR_NO_HARDWARE_CURSORS = "1";
-	QT_QPA_PLATFORMTHEME = "qt6ct";
-	__GLX_VENDOR_LIBRARY_NAME = "nvidia";
       };
     };
   };

@@ -8,6 +8,7 @@ inputs : {
   dunst = import ./dunst inputs;
   gtk = import ./gtk inputs;
   hyprland = import ./hyprland inputs;
+  ags = import ./ags inputs;
   kitty = import ./kitty inputs;
   # mangohud = import ./mangohud inputs;
   # mpv = import ./mpv inputs;

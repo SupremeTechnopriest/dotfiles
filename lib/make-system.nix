@@ -2,7 +2,7 @@
 # █▀▄▀█ ▄▀█ █▄▀ █▀▀   █▀ █▄█ █▀ ▀█▀ █▀▀ █▀▄▀█ 
 # █░▀░█ █▀█ █░█ ██▄   ▄█ ░█░ ▄█ ░█░ ██▄ █░▀░█ 
 
-{ self, ... } @ inputs: name:
+{ self, ... } @ inputs: { name, system }:
 
 let
   config-folder = "${self}/nixos/configs/${name}";
@@ -12,7 +12,7 @@ let
   users = "${config-folder}/users.nix";
 
 in inputs.nixpkgs.lib.nixosSystem {
-  system = "x86_64-linux";
+  system = system;
   modules = builtins.attrValues self.nixosModules ++ [
     config-file
     bootloader

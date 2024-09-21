@@ -2,7 +2,7 @@
 # █▀▄▀█ ▄▀█ █▄▀ █▀▀   █░█ █▀█ █▀▄▀█ █▀▀ 
 # █░▀░█ █▀█ █░█ ██▄   █▀█ █▄█ █░▀░█ ██▄ 
 
-{ self, ... } @ inputs: user: host: system:
+{ self, ... } @ inputs: { user, host, system }:
 
 let
   config-file = import "${self}/home/configs/${user}@${host}.nix" inputs;
@@ -12,7 +12,6 @@ in inputs.home-manager.lib.homeManagerConfiguration {
   pkgs = inputs.nixpkgs.legacyPackages.${system};
   modules = builtins.attrValues self.homeModules ++ [
     config-file
-    # inputs.nur.nixosModules.nur
     inputs.hyprland.homeManagerModules.default
     inputs.nixvim.homeManagerModules.nixvim
     {
