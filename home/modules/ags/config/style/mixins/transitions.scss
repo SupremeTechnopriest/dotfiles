@@ -1,0 +1,16 @@
+@mixin fluent-decel {
+  transition: 200ms cubic-bezier(0.1, 1, 0, 1);
+}
+
+@mixin fluent-decel-long {
+  transition: 1000ms cubic-bezier(0.1, 1, 0, 1);
+}
+
+@mixin element-decel {
+  transition: 300ms cubic-bezier(0, 0.55, 0.45, 1);
+}
+
+@mixin full-rounding {
+  border-radius: 9999px;
+  -gtk-outline-radius: 9999px;
+}

@@ -1,5 +1,4 @@
-import { options } from '@/options'
-
+import type Gtk from '@/types/@girs/gtk-3.0/gtk-3.0'
 import type { ButtonProps } from '@/types/widgets/button'
 
 type PanelButtonProps = ButtonProps & {
@@ -15,7 +14,8 @@ export const PanelButton = ({
   ...rest
 }: PanelButtonProps) =>
   Widget.Button({
-    child: Widget.Box({ child }),
+    cursor: 'pointer',
+    child,
     setup: (self) => {
       let open = false
 
@@ -46,7 +46,7 @@ export const PanelButton = ({
   })
 
 type ButtonGroupProps = {
-  children: any[]
+  children: Array<() => Gtk.Widget>
 }
 
 export const ButtonGroup = ({ children }: ButtonGroupProps) =>

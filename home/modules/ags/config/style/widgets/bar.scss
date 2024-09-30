@@ -3,6 +3,9 @@
 
 $bar-spacing: $spacing * 0.3;
 $button-radius: $radius;
+$bar-ws-width: 1.7rem;
+$bar-ws-padding: $padding * 0.5;
+$bar-ws-indicator-radius: 5px;
 
 @mixin panel-button($flat: true, $reactive: true) {
   @include accs-button($flat, $reactive);
@@ -39,4 +42,83 @@ $button-radius: $radius;
       @include accs-button($flat: false);
     }
   }
+
+  // Workspaces
+
+  .workspaces {
+    @include accs-button($flat: false, $reactive: false);
+    padding: $bar-ws-padding 0;
+
+    .bar-ws-wrapper {
+      border-radius: 10rem;
+      padding: $bar-ws-padding;
+    }
+
+    .bar-ws-container {
+      transition: 700ms cubic-bezier(0.1, 1, 0, 1);
+    }
+  }
+}
+
+.bar-ws {
+  min-width: $bar-ws-width;
+  min-height: $bar-ws-indicator-radius;
+  color: $muted;
+}
+
+.bar-ws-hover {
+  background-color: $primary;
+  color: $base;
+}
+
+.bar-ws-active {
+  background-color: $success;
+  color: $base;
+}
+
+.bar-ws-occupied {
+  background-color: $overlay;
+  color: $text;
+}
+
+.bar-resource-progress {
+  @include fluent-decel-long;
+  min-width: 0.136rem; // line width
+  min-height: 1.636rem;
+  padding: 0rem;
+  background-color: transparentize($primary, 0.8);
+  color: $primary;
+}
+
+.bar-resource-icon-container {
+  @include full-rounding;
+  @include element-decel;
+  min-height: 1.77rem;
+  min-width: 1.77rem;
+  border-radius: 10rem;
+  font-size: 10px;
+  color: $primary;
+}
+
+.bar-resource-icon {
+  font-size: 12px;
+}
+
+.bar-resource-label {
+  min-width: 1.5rem;
+}
+
+.bar-systray {
+  @include full-rounding;
+  margin: 0.137rem 0rem;
+  padding: 0rem 0.682rem;
+}
+
+.bar-systray-item {
+  @include full-rounding;
+  @include element_decel;
+  min-height: 1.032rem;
+  min-width: 1.032rem;
+  font-size: 1.032rem;
+  color: $subtle;
 }

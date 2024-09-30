@@ -1,14 +1,16 @@
 import { options } from '@/options'
 
+import { Separator } from '@/widget/bar/Separator'
 import { Workspaces } from '@/widget/bar/modules/Workspaces'
 import { Date } from '@/widget/bar/modules/Date'
 // import { ThemeCycle } from '@/widget/bar/modules/Theme'
 import { WallpaperCycle } from '@/widget/bar/modules/Wallpaper'
-import { ScreenGroup } from '@/widget/bar/modules/ScreenGroup'
 import { ColorPicker } from '@/widget/bar/modules/ColorPicker'
+import { CPU, RAM, Temp } from '@/widget/bar/modules/ResouceMonitor'
 // import { ScreenRecord } from '@/widget/bar/modules/ScreenRecord'
 // import { ScreenShot } from '@/widget/bar/modules/ScreenShot'
-// import { Indicators } from '@/widget/bar/modules/Indicators'
+import { Indicators } from '@/widget/bar/modules/Indicators'
+import { Tray } from '@/widget/bar/modules/Tray'
 
 const {
   transparent,
@@ -19,15 +21,19 @@ const {
 export type BarWidget = keyof typeof widget
 
 const widget = {
+  separator: Separator,
   workspaces: Workspaces,
   date: Date,
   // theme: ThemeCycle,
   wallpaper: WallpaperCycle,
-  screengroup: ScreenGroup,
   colorpicker: ColorPicker,
+  cpu: CPU,
+  ram: RAM,
+  temp: Temp,
   // screenrecord: ScreenRecord,
   // screenshot: ScreenShot,
-  // indicators: Indicators,
+  tray: Tray,
+  indicators: Indicators,
   expander: () => Widget.Box({ expand: true })
 }
 

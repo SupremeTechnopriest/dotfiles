@@ -1,0 +1,37 @@
+@mixin titlefont {
+  // Geometric sans-serif
+  font-family: $font-title, sans-serif;
+}
+
+@mixin mainfont {
+  // Other clean sans-serif
+  font-family: $font-main, sans-serif;
+}
+
+@mixin monofont {
+  // Monospace for sys info n stuff. Doesn't have to be a nerd font, but it's cool.
+  font-family: $font-mono, monospace;
+}
+
+@mixin readingfont {
+  // The most readable fonts, for a comfortable reading experience
+  // in stuff like AI chat on sidebar
+  font-family: $font-reading, sans-serif;
+}
+
+@mixin icon-material {
+  // Material Design Icons
+  font-family: 'Material Symbols Rounded', 'MaterialSymbolsRounded',
+    'Material Symbols Outlined', 'Material Symbols Sharp';
+}
+
+@mixin icon-fa {
+  // Material Design Icons
+  font-family: 'Material Symbols Rounded', 'MaterialSymbolsRounded',
+    'Material Symbols Outlined', 'Material Symbols Sharp';
+}
+
+@mixin icon-nerd {
+  // Nerd Fonts
+  font-family: 'DankMono Nerd Font', monospace;
+}

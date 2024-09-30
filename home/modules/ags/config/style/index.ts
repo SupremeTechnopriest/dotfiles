@@ -55,7 +55,12 @@ const variables = () => [
   $('hl-high', t('highlight.high')),
 
   $('font-size', `${options.font.size}pt`),
-  $('font-name', options.font.name),
+  $('font-title', options.font.face.title),
+  $('font-main', options.font.face.main),
+  $('font-reading', options.font.face.reading),
+  $('font-icon', options.font.face.icon),
+  $('font-nerd', options.font.face.nerd),
+  $('font-mono', options.font.face.mono),
 
   $('scheme', scheme),
   $('padding', `${padding}pt`),

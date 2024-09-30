@@ -1,6 +1,7 @@
 import { options } from '@/options'
 import { clock } from '@/lib/variables'
 import { PanelButton } from '@/widget/bar/PanelButton'
+import { Separator } from '@/widget/bar/Separator'
 
 const { format, action } = options.bar.date
 const time = Utils.derive([clock, format.time], (c, f) => c.format(f) || '')
@@ -17,13 +18,7 @@ export const Date = () =>
           justification: 'right',
           label: time.bind()
         }),
-
-        Widget.Label({
-          css: 'margin: 0 0.5rem',
-          className: 'text-muted',
-          label: '•'
-        }),
-
+        Separator(),
         Widget.Label({
           justification: 'right',
           label: date.bind()

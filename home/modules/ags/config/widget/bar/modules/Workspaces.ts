@@ -1,19 +1,15 @@
 import { options } from '@/options'
 
 const { Gdk, Gtk } = imports.gi
-const Lang = imports.lang
 const Cairo = imports.cairo
-const Pango = imports.gi.Pango
-const PangoCairo = imports.gi.PangoCairo
 const { Box, DrawingArea, EventBox } = Widget
-
-const dummyWs = Box({ className: 'bar-ws' }) // Not shown. Only for getting size props
-const dummyActiveWs = Box({ className: 'bar-ws bar-ws-active' }) // Not shown. Only for getting size props
-const dummyOccupiedWs = Box({ className: 'bar-ws bar-ws-occupied' }) // Not shown. Only for getting size props
 
 const Hyprland = await Service.import('hyprland')
 
-const { workspaces } = options
+const dummyWs = Box({ className: 'bar-ws' }) // Not shown. Only for getting size props
+const dummyActiveWs = Box({ className: 'bar-ws bar-ws-active' }) // Not shown. Only for getting size props
+const dummyHoverWs = Box({ className: 'bar-ws bar-ws-hover' }) // Not shown. Only for getting size props
+const dummyOccupiedWs = Box({ className: 'bar-ws bar-ws-occupied' }) // Not shown. Only for getting size props
 
 const mix = (value1: number, value2: number, perc: number) => {
   return value1 * perc + value2 * (1 - perc)
@@ -23,15 +19,16 @@ const mix = (value1: number, value2: number, perc: number) => {
 const WorkspaceContents = (count = 10) => {
   return DrawingArea({
     className: 'bar-ws-container',
+    heightRequest: 1,
     attribute: {
-      initialized: false,
       workspaceMask: 0,
       workspaceGroup: 0,
-      updateMask: (self) => {
+      hoveredWorkspace: -1,
+      updateMask: (self: any) => {
         const offset =
           Math.floor((Hyprland.active.workspace.id - 1) / count) *
-          options.workspaces.workspaces.value
-        // if (self.attribute.initialized) return; // We only need this to run once
+          options.bar.workspaces.workspaces.value
+
         const workspaces = Hyprland.workspaces
         let workspaceMask = 0
         for (let i = 0; i < workspaces.length; i++) {
@@ -39,19 +36,34 @@ const WorkspaceContents = (count = 10) => {
           if (ws.id <= offset || ws.id > offset + count) continue // Out of range, ignore
           if (workspaces[i].windows > 0) workspaceMask |= 1 << (ws.id - offset)
         }
-        // console.log('Mask:', workspaceMask.toString(2));
         self.attribute.workspaceMask = workspaceMask
-        // self.attribute.initialized = true;
         self.queue_draw()
       },
-      toggleMask: (self, occupied, name) => {
+      toggleMask: (self: any, occupied: boolean, name: string) => {
         if (occupied) self.attribute.workspaceMask |= 1 << parseInt(name)
         else self.attribute.workspaceMask &= ~(1 << parseInt(name))
         self.queue_draw()
       }
     },
     setup: (area) => {
-      return area
+      area.add_events(Gdk.EventMask.POINTER_MOTION_MASK)
+      area.add_events(Gdk.EventMask.LEAVE_NOTIFY_MASK)
+      area.on('motion-notify-event', (self, event) => {
+        const [_, cursorX] = event.get_coords()
+        const widgetWidth = self.get_allocation().width
+        const wsId = Math.ceil(
+          (cursorX * options.bar.workspaces.workspaces.value) / widgetWidth
+        )
+        area.attribute.hoveredWorkspace = wsId
+        area.queue_draw()
+      })
+
+      area.on('leave-notify-event', () => {
+        area.attribute.hoveredWorkspace = -1
+        area.queue_draw()
+      })
+
+      area
         .hook(Hyprland.active.workspace, (self) => {
           self.setCss(
             `font-size: ${((Hyprland.active.workspace.id - 1) % count) + 1}px;`
@@ -71,49 +83,23 @@ const WorkspaceContents = (count = 10) => {
           'notify::workspaces'
         )
     },
-    drawFn: (area, cr)  => {
-
-      const offset =
-        Math.floor((Hyprland.active.workspace.id - 1) / count) *
-        options.workspaces.workspaces.value
-
+    drawFn: (area, cr: any) => {
       const allocation = area.get_allocation()
-      const { width, height } = allocation
+      const { height } = allocation
 
       const workspaceStyleContext = dummyWs.get_style_context()
-      console.log(workspaceStyleContext)
       const workspaceDiameter = workspaceStyleContext.get_property(
         'min-width',
         Gtk.StateFlags.NORMAL
       )
-
       const workspaceRadius = workspaceDiameter / 2
-      const workspaceFontSize =
-        (workspaceStyleContext.get_property(
-          'font-size',
-          Gtk.StateFlags.NORMAL
-        ) /
-          4) *
-        3
-      const workspaceFontFamily = workspaceStyleContext.get_property(
-        'font-family',
-        Gtk.StateFlags.NORMAL
-      )
-      const workspaceFontWeight = workspaceStyleContext.get_property(
-        'font-weight',
-        Gtk.StateFlags.NORMAL
-      )
-      const wsbg = workspaceStyleContext.get_property(
-        'background-color',
-        Gtk.StateFlags.NORMAL
-      )
+
       const wsfg = workspaceStyleContext.get_property(
         'color',
         Gtk.StateFlags.NORMAL
       )
 
-      const occupiedWorkspaceStyleContext =
-        dummyOccupiedWs.get_style_context()
+      const occupiedWorkspaceStyleContext = dummyOccupiedWs.get_style_context()
       const occupiedbg = occupiedWorkspaceStyleContext.get_property(
         'background-color',
         Gtk.StateFlags.NORMAL
@@ -123,8 +109,13 @@ const WorkspaceContents = (count = 10) => {
         Gtk.StateFlags.NORMAL
       )
 
-      const activeWorkspaceStyleContext =
-        dummyActiveWs.get_style_context()
+      const hoverWorkspaceStyleContext = dummyHoverWs.get_style_context()
+      const hoverbg = hoverWorkspaceStyleContext.get_property(
+        'background-color',
+        Gtk.StateFlags.NORMAL
+      )
+
+      const activeWorkspaceStyleContext = dummyActiveWs.get_style_context()
       const activebg = activeWorkspaceStyleContext.get_property(
         'background-color',
         Gtk.StateFlags.NORMAL
@@ -145,18 +136,11 @@ const WorkspaceContents = (count = 10) => {
       const activeWsCenterY = height / 2
 
       // Font
-      const layout = PangoCairo.create_layout(cr)
-      const fontDesc = Pango.font_description_from_string(
-        `${workspaceFontFamily[0]} ${getFontWeightName(workspaceFontWeight)} ${workspaceFontSize}`
-      )
-      layout.set_font_description(fontDesc)
       cr.setAntialias(Cairo.Antialias.BEST)
-      // Get kinda min radius for number indicators
-      layout.set_text('0'.repeat(count.toString().length), -1)
-      const [layoutWidth, layoutHeight] = layout.get_pixel_size()
-      const indicatorRadius =
-        (Math.max(layoutWidth, layoutHeight) / 2) * 1.15 // smaller than sqrt(2)*radius
-      const indicatorGap = workspaceRadius - indicatorRadius
+      const indicatorRadius = workspaceStyleContext.get_property(
+        'min-height',
+        Gtk.StateFlags.NORMAL
+      )
 
       for (let i = 1; i <= count; i++) {
         if (area.attribute.workspaceMask & (1 << i)) {
@@ -210,27 +194,11 @@ const WorkspaceContents = (count = 10) => {
         }
       }
 
-      // Draw active ws
-      cr.setSourceRGBA(
-        activebg.red,
-        activebg.green,
-        activebg.blue,
-        activebg.alpha
-      )
-      cr.arc(
-        activeWsCenterX,
-        activeWsCenterY,
-        indicatorRadius,
-        0,
-        2 * Math.PI
-      )
-      cr.fill()
-
       // Draw workspace numbers
       for (let i = 1; i <= count; i++) {
         const inactivecolors =
           area.attribute.workspaceMask & (1 << i) ? occupiedfg : wsfg
-        if (i == activeWs) {
+        if (i === activeWs) {
           cr.setSourceRGBA(
             activefg.red,
             activefg.green,
@@ -242,25 +210,16 @@ const WorkspaceContents = (count = 10) => {
         else if (
           (i == Math.floor(activeWs) &&
             Hyprland.active.workspace.id < activeWs) ||
-          (i == Math.ceil(activeWs) &&
-            Hyprland.active.workspace.id > activeWs)
+          (i == Math.ceil(activeWs) && Hyprland.active.workspace.id > activeWs)
         ) {
           cr.setSourceRGBA(
-            mix(
-              activefg.red,
-              inactivecolors.red,
-              1 - Math.abs(activeWs - i)
-            ),
+            mix(activefg.red, inactivecolors.red, 1 - Math.abs(activeWs - i)),
             mix(
               activefg.green,
               inactivecolors.green,
               1 - Math.abs(activeWs - i)
             ),
-            mix(
-              activefg.blue,
-              inactivecolors.blue,
-              1 - Math.abs(activeWs - i)
-            ),
+            mix(activefg.blue, inactivecolors.blue, 1 - Math.abs(activeWs - i)),
             activefg.alpha
           )
         }
@@ -268,57 +227,66 @@ const WorkspaceContents = (count = 10) => {
         else if (
           (i == Math.floor(activeWs) &&
             Hyprland.active.workspace.id > activeWs) ||
-          (i == Math.ceil(activeWs) &&
-            Hyprland.active.workspace.id < activeWs)
+          (i == Math.ceil(activeWs) && Hyprland.active.workspace.id < activeWs)
         ) {
           cr.setSourceRGBA(
-            mix(
-              activefg.red,
-              inactivecolors.red,
-              1 - Math.abs(activeWs - i)
-            ),
+            mix(activefg.red, inactivecolors.red, 1 - Math.abs(activeWs - i)),
             mix(
               activefg.green,
               inactivecolors.green,
               1 - Math.abs(activeWs - i)
             ),
-            mix(
-              activefg.blue,
-              inactivecolors.blue,
-              1 - Math.abs(activeWs - i)
-            ),
+            mix(activefg.blue, inactivecolors.blue, 1 - Math.abs(activeWs - i)),
             activefg.alpha
           )
         }
+        // Hovered
+        else if (i === area.attribute.hoveredWorkspace) {
+          cr.setSourceRGBA(
+            hoverbg.red,
+            hoverbg.green,
+            hoverbg.blue,
+            hoverbg.alpha
+          )
+        }
         // Inactive
-        else
+        else {
           cr.setSourceRGBA(
             inactivecolors.red,
             inactivecolors.green,
             inactivecolors.blue,
             inactivecolors.alpha
           )
+        }
 
-        layout.set_text(`${i + offset}`, -1)
-        const [layoutWidth, layoutHeight] = layout.get_pixel_size()
-        const x =
-          -workspaceRadius + workspaceDiameter * i - layoutWidth / 2
-        const y = (height - layoutHeight) / 2
-        cr.moveTo(x, y)
-        PangoCairo.show_layout(cr, layout)
-        cr.stroke()
+        // const [layoutWidth] = layout.get_pixel_size()
+        const x = -(workspaceDiameter / 2) + workspaceDiameter * i
+        const y = height / 2
+
+        cr.arc(x, y, indicatorRadius, 0, 2 * Math.PI)
+        cr.fill()
       }
-    })
-  )
+
+      // Draw active ws
+      cr.setSourceRGBA(
+        activebg.red,
+        activebg.green,
+        activebg.blue,
+        activebg.alpha
+      )
+      cr.arc(activeWsCenterX, activeWsCenterY, indicatorRadius, 0, 2 * Math.PI)
+      cr.fill()
+    }
   })
 }
 
-export const Workspaces = () => {
-  return EventBox({
-    onScrollUp: () =>
-      Hyprland.messageAsync(`dispatch workspace -1`).catch(print),
-    onScrollDown: () =>
-      Hyprland.messageAsync(`dispatch workspace +1`).catch(print),
+const dispatch = (ws: string | number) =>
+  Hyprland.messageAsync(`dispatch workspace ${ws}`)
+
+export const Workspaces = () =>
+  EventBox({
+    onScrollUp: () => dispatch('-1'),
+    onScrollDown: () => dispatch('+1'),
     onSecondaryClick: () => App.toggleWindow('overview'),
     attribute: {
       clicked: false,
@@ -326,12 +294,12 @@ export const Workspaces = () => {
     },
     child: Box({
       homogeneous: true,
-      className: 'bar-group-margin',
+      className: 'workspaces',
       children: [
         Box({
-          className: 'bar-group bar-group-standalone bar-group-pad',
+          className: 'bar-ws-wrapper',
           css: 'min-width: 2px;',
-          children: [WorkspaceContents(options.workspaces.workspaces.value)]
+          children: [WorkspaceContents(options.bar.workspaces.workspaces.value)]
         })
       ]
     }),
@@ -342,13 +310,9 @@ export const Workspaces = () => {
         const [_, cursorX] = event.get_coords()
         const widgetWidth = self.get_allocation().width
         const wsId = Math.ceil(
-          (cursorX * options.workspaces.workspaces.value) / widgetWidth
+          (cursorX * options.bar.workspaces.workspaces.value) / widgetWidth
         )
-        Utils.execAsync([
-          `${App.configDir}/scripts/hyprland/workspace_action.sh`,
-          'workspace',
-          `${wsId}`
-        ]).catch(print)
+        dispatch(wsId)
       })
       self.on('button-press-event', (self, event) => {
         if (event.get_button()[1] === 1) {
@@ -356,13 +320,9 @@ export const Workspaces = () => {
           const [_, cursorX] = event.get_coords()
           const widgetWidth = self.get_allocation().width
           const wsId = Math.ceil(
-            (cursorX * options.workspaces.workspaces.value) / widgetWidth
+            (cursorX * options.bar.workspaces.workspaces.value) / widgetWidth
           )
-          Utils.execAsync([
-            `${App.configDir}/scripts/hyprland/workspace_action.sh`,
-            'workspace',
-            `${wsId}`
-          ]).catch(print)
+          dispatch(wsId)
         } else if (event.get_button()[1] === 8) {
           Hyprland.messageAsync(`dispatch togglespecialworkspace`).catch(print)
         }
@@ -373,4 +333,3 @@ export const Workspaces = () => {
       )
     }
   })
-}

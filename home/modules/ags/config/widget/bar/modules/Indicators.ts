@@ -1,40 +1,43 @@
-import { PanelButton } from '@/widget/bar/PanelButton'
-import { icon } from '@/lib/utils'
+import { options } from '@/options'
 import { icons } from '@/lib/icons'
-import { asusctl } from '@/service/asusctl'
+import { PanelButton } from '@/widget/bar/PanelButton'
 
-const notifications = await Service.import('notifications')
+const Notifications = await Service.import('notifications')
 const bluetooth = await Service.import('bluetooth')
 const audio = await Service.import('audio')
 const network = await Service.import('network')
-const powerprof = await Service.import('powerprofiles')
 
-const ProfileIndicator = () => {
-  const visible = asusctl.available
-    ? asusctl.bind('profile').as((p) => p !== 'Balanced')
-    : powerprof.bind('active_profile').as((p) => p !== 'balanced')
-
-  const icon = icon(asusctl.available
-    ? asusctl.bind('profile').as((p) => icons.asusctl.profile[p])
-    : powerprof.bind('active_profile').as((p) => icons.powerprofile[p]))
-
-  return Widget.Icon({ visible, icon })
-}
-
-const ModeIndicator = () => {
-  if (!asusctl.available) {
-    return Widget.Icon({
-      setup(self) {
-        Utils.idle(() => (self.visible = false))
-      }
+export const NotificationIndicator = (notifCenterName = 'controlcenter') => {
+  const widget = Widget.Revealer({
+    transition: 'slide_left',
+    transitionDuration: options.transition.value,
+    revealChild: Notifications.bind('notifications').as((n) => n.length >= 0),
+    child: Widget.Box({
+      children: [
+        Widget.Icon({
+          className: 'text-normal',
+          icon: icons.notifications.noisy
+        }),
+        Widget.Label({
+          className: 'text-subtle',
+          label: Notifications.bind('notifications').as((n) =>
+            n.length.toString()
+          )
+        })
+      ]
     })
-  }
-
-  return Widget.Icon({
-    visible: asusctl.bind('mode').as((m) => m !== 'Hybrid'),
-    icon: asusctl.bind('mode').as((m) => icon(icons.asusctl.mode[m]))
   })
+  return widget
 }
+
+const DNDIndicator = () =>
+  Widget.Box({
+    child: Widget.Icon({
+      // visible: Notifications.bind('dnd'),
+      className: 'text-muted',
+      icon: icons.notifications.silent
+    })
+  })
 
 const MicrophoneIndicator = () =>
   Widget.Icon()
@@ -56,19 +59,14 @@ const MicrophoneIndicator = () =>
       self.icon = cons.find(([n]) => n <= vol * 100)?.[1] || ''
     })
 
-const DNDIndicator = () =>
-  Widget.Icon({
-    visible: notifications.bind('dnd'),
-    icon: icon(icons.notifications.silent)
-  })
-
 const BluetoothIndicator = () =>
   Widget.Overlay({
     class_name: 'bluetooth',
     passThrough: true,
     visible: bluetooth.bind('enabled'),
     child: Widget.Icon({
-      icon: icon(icons.bluetooth.enabled)
+      className: 'bar-indicator',
+      icon: icons.bluetooth.enabled
     }),
     overlay: Widget.Label({
       hpack: 'end',
@@ -102,16 +100,19 @@ const AudioIndicator = () =>
 export const Indicators = () =>
   PanelButton({
     window: 'quicksettings',
-    on_clicked: () => App.toggleWindow('quicksettings'),
+    flat: true,
+    on_clicked: () => App.toggleWindow('controlcenter'),
     on_scroll_up: () => (audio.speaker.volume += 0.02),
     on_scroll_down: () => (audio.speaker.volume -= 0.02),
-    child: Widget.Box([
-      ProfileIndicator(),
-      ModeIndicator(),
-      DNDIndicator(),
-      BluetoothIndicator(),
-      NetworkIndicator(),
-      AudioIndicator(),
-      MicrophoneIndicator()
-    ])
+    child: Widget.Box({
+      className: 'spacing-h-15',
+      children: [
+        NotificationIndicator(),
+        DNDIndicator(),
+        BluetoothIndicator(),
+        NetworkIndicator(),
+        AudioIndicator(),
+        MicrophoneIndicator()
+      ]
+    })
   })

@@ -1,0 +1,10 @@
+.control-center {
+  // @include menu_decel;
+  // @include elevation-border;
+  // @include elevation2;
+  // border-radius: $rounding - $elevation_margin + 0.068rem;
+  border-radius: $radius;
+  min-width: 27.818rem;
+  background-color: $base;
+  padding: 1.023rem;
+}

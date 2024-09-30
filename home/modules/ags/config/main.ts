@@ -6,18 +6,17 @@ import { init } from '@/lib/init'
 import { Bar } from '@/widget/bar/Bar'
 import { ScreenCorners } from '@/widget/bar/ScreenCorners'
 import { FauxCorner } from '@/widget/desktop/FauxCorner'
+// import { setupControlCenter } from '@/widget/controlcenter'
 
 App.config({
   onConfigParsed: () => {
+    // setupControlCenter()
     // setupQuickSettings()
     // setupDateMenu()
     init()
   },
   closeWindowDelay: {
-    // launcher: options.transition.value,
-    // overview: options.transition.value,
-    // quicksettings: options.transition.value,
-    // datemenu: options.transition.value
+    controlcenter: options.transition.value
   },
   windows: () => [
     ...forMonitors(Bar),

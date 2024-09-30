@@ -113,8 +113,8 @@ export const icons = {
     recording: 'media-record-symbolic'
   },
   notifications: {
-    noisy: 'org.gnome.Settings-notifications-symbolic',
-    silent: 'notifications-disabled-symbolic',
+    noisy: 'bell-symbolic',
+    silent: 'bell-slash-symbolic',
     message: 'chat-bubbles-symbolic'
   },
   trash: {
@@ -138,9 +138,15 @@ export const icons = {
     next: 'media-skip-forward-symbolic'
   },
   system: {
-    cpu: 'org.gnome.SystemMonitor-symbolic',
-    ram: 'drive-harddisk-solidstate-symbolic',
-    temp: 'temperature-symbolic'
+    cpu: 'cpu-symbolic',
+    ram: 'ram-symbolic',
+    temperature: {
+      empty: 'temperature-empty-symbolic',
+      quarter: 'temperature-quarter-symbolic',
+      half: 'temperature-half-symbolic',
+      threeQuarter: 'temperature-three-quarter-symbolic',
+      full: 'temperature-full-symbolic'
+    }
   },
   color: {
     dark: 'dark-mode-symbolic',

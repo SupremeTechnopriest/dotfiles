@@ -147,8 +147,13 @@ export const options = mkOptions(OPTIONS, {
   },
 
   font: {
-    size: opt(10),
-    name: opt('DankMono Nerd Font')
+    size: opt(12),
+    face: {
+      title: opt('Gabarito'),
+      main: opt('Inter'),
+      mono: opt('DankMono Nerd Font'),
+      reading: opt('Readex Pro')
+    }
   },
 
   transition: opt(200),
@@ -171,9 +176,20 @@ export const options = mkOptions(OPTIONS, {
     corners: opt(50),
     transparent: opt(false),
     layout: {
-      start: opt<Array<BarWidget>>(['screengroup']),
-      center: opt<Array<BarWidget>>(['workspaces', 'date']),
-      end: opt<Array<BarWidget>>(['colorpicker', 'wallpaper'])
+      start: opt<Array<BarWidget>>([]),
+      center: opt<Array<BarWidget>>(['workspaces']),
+      end: opt<Array<BarWidget>>([
+        'temp',
+        'cpu',
+        'ram',
+        'date',
+        'separator',
+        'expander',
+        'tray',
+        // 'colorpicker',
+        // 'wallpaper',
+        'indicators'
+      ])
     },
 
     date: {
@@ -182,10 +198,34 @@ export const options = mkOptions(OPTIONS, {
         date: opt('%A, %m/%d')
       },
       action: opt(() => App.toggleWindow('datemenu'))
+    },
+
+    workspaces: {
+      workspaces: opt(10)
     }
   },
 
-  workspaces: {
-    workspaces: opt(10)
+  controlCenter: {
+    avatar: {
+      image: opt(`/var/lib/AccountsService/icons/${Utils.USER}`),
+      size: opt(70)
+    },
+    width: opt(380),
+    position: opt<'left' | 'center' | 'right'>('right'),
+    networkSettings: opt('gtk-launch gnome-control-center'),
+    media: {
+      monochromeIcon: opt(true),
+      coverSize: opt(100)
+    }
+  },
+
+  apps: {
+    taskManager: opt('gnome-usage')
+  },
+
+  system: {
+    fetchInterval: opt(1000),
+    temperaturePath: opt('/sys/class/thermal/thermal_zone0/temp'),
+    maxTemperature: opt(100)
   }
 })

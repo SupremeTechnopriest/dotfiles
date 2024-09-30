@@ -12,7 +12,12 @@
   btop.enable = true;
   dunst.enable = false;
   neovim.enable = true;
-  hyprland.enable = true;
+  hyprland = {
+    enable = true;
+    nvidia.enable = true;
+    monitors.enable = true;
+  };
+
   ags.enable = true;
   # mangohud.enable = true;
   # mpv.enable = true;
