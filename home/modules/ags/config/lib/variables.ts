@@ -80,7 +80,7 @@ export const temperature = Variable(0, {
   poll: [interval, `cat ${tempPath}`, (out) => Number.parseInt(out) / 1000]
 })
 
-export const temperatureIcon = Variable(icons.system.temperature.empty, {
+export const temperatureIcon = Variable('temperature-empty', {
   poll: [
     interval,
     `cat ${tempPath}`,
@@ -88,11 +88,11 @@ export const temperatureIcon = Variable(icons.system.temperature.empty, {
       const temp = Number.parseInt(out) / 1000
       const max = options.system.maxTemperature.value
 
-      if (temp <= max * 0.25) return icons.system.temperature.empty
-      if (temp <= max * 0.5) return icons.system.temperature.quarter
-      if (temp <= max * 0.75) return icons.system.temperature.half
-      if (temp <= max) return icons.system.temperature.threeQuarter
-      return icons.system.temperature.full
+      if (temp <= max * 0.25) return 'temperature-empty'
+      if (temp <= max * 0.5) return 'temperature-quarter'
+      if (temp <= max * 0.75) return 'temperature-half'
+      if (temp <= max) return 'temperature-three-quarter'
+      return 'temperature-full'
     }
   ]
 })

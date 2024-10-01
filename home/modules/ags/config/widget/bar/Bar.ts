@@ -7,9 +7,10 @@ import { Date } from '@/widget/bar/modules/Date'
 import { WallpaperCycle } from '@/widget/bar/modules/Wallpaper'
 import { ColorPicker } from '@/widget/bar/modules/ColorPicker'
 import { CPU, RAM, Temp } from '@/widget/bar/modules/ResouceMonitor'
-// import { ScreenRecord } from '@/widget/bar/modules/ScreenRecord'
-// import { ScreenShot } from '@/widget/bar/modules/ScreenShot'
+import { ScreenRecord } from '@/widget/bar/modules/ScreenRecord'
+import { ScreenShot } from '@/widget/bar/modules/ScreenShot'
 import { Indicators } from '@/widget/bar/modules/Indicators'
+import { Weather } from '@/widget/bar/modules/Weather'
 import { Tray } from '@/widget/bar/modules/Tray'
 
 const {
@@ -30,10 +31,11 @@ const widget = {
   cpu: CPU,
   ram: RAM,
   temp: Temp,
-  // screenrecord: ScreenRecord,
-  // screenshot: ScreenShot,
+  screenrecord: ScreenRecord,
+  screenshot: ScreenShot,
   tray: Tray,
   indicators: Indicators,
+  weather: Weather,
   expander: () => Widget.Box({ expand: true })
 }
 

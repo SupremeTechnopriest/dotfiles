@@ -1,19 +1,19 @@
-@mixin titlefont {
+@mixin font-title {
   // Geometric sans-serif
   font-family: $font-title, sans-serif;
 }
 
-@mixin mainfont {
+@mixin font-main {
   // Other clean sans-serif
   font-family: $font-main, sans-serif;
 }
 
-@mixin monofont {
+@mixin font-mono {
   // Monospace for sys info n stuff. Doesn't have to be a nerd font, but it's cool.
   font-family: $font-mono, monospace;
 }
 
-@mixin readingfont {
+@mixin font-reading {
   // The most readable fonts, for a comfortable reading experience
   // in stuff like AI chat on sidebar
   font-family: $font-reading, sans-serif;
@@ -21,17 +21,106 @@
 
 @mixin icon-material {
   // Material Design Icons
-  font-family: 'Material Symbols Rounded', 'MaterialSymbolsRounded',
-    'Material Symbols Outlined', 'Material Symbols Sharp';
+  font-family: 'Material Symbols Rounded', 'Material Symbols Outlined',
+    'Material Symbols Sharp';
 }
 
 @mixin icon-fa {
-  // Material Design Icons
-  font-family: 'Material Symbols Rounded', 'MaterialSymbolsRounded',
-    'Material Symbols Outlined', 'Material Symbols Sharp';
+  // Font Awesome Icons
+  font-family: 'Font Awesome 6 Free Solid', 'Font Awesome 6 Free Regular',
+    'Font Awesome 6 Brands';
 }
 
 @mixin icon-nerd {
   // Nerd Fonts
   font-family: 'DankMono Nerd Font', monospace;
+}
+
+* {
+  font-size: $font-size;
+  font-family: $font-main;
+}
+
+.text-bold {
+  font-weight: bold;
+}
+
+.text-normal {
+  color: $text;
+}
+
+.text-subtle {
+  color: $subtle;
+}
+
+.text-muted {
+  color: $muted;
+}
+
+.text-primary {
+  color: $primary;
+}
+
+.text-error {
+  color: $error;
+}
+
+.text-xxs {
+  font-size: 0.25rem;
+}
+
+.text-xs {
+  font-size: 0.75rem;
+}
+
+.text-sm {
+  font-size: 0.875rem;
+}
+
+.text-base {
+  font-size: 1rem;
+}
+
+.text-md {
+  font-size: 1.125rem;
+}
+
+.text-lg {
+  font-size: 1.25rem;
+}
+
+.text-xl {
+  font-size: 1.5rem;
+}
+
+.text-xxl {
+  font-size: 1.875rem;
+}
+
+.text-title {
+  @include font-title;
+}
+
+.text-main {
+  @include font-main;
+}
+
+.text-mono {
+  @include font-mono;
+}
+
+.text-reading {
+  @include font-reading;
+}
+
+.icon-fa {
+  @include icon-fa;
+}
+
+.icon-material {
+  @include icon-material;
+}
+
+.icon-nerd {
+  @include icon-nerd;
 }

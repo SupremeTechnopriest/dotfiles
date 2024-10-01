@@ -1,14 +1,14 @@
 import { options } from '@/options'
-import { icons } from '@/lib/icons'
 import { cpu, ram, temperature, temperatureIcon } from '@/lib/variables'
 import { CircularProgress } from '@/widget/common/CircularProgress'
+import { FaIcon } from '@/widget/common/FaIcon'
 import { PanelButton } from '@/widget/bar/PanelButton'
 
 import type { Variable } from '@/types/variable'
-import type { Binding } from '@/types/service'
+import type Label from '@/types/widgets/label'
 
 interface ResourceMonitorProps {
-  icon: string | Binding<Variable<string>, any, string>
+  icon: Label<unknown>
   iconCss?: string
   value: Variable<number>
   unit?: string
@@ -17,7 +17,6 @@ interface ResourceMonitorProps {
 
 export const ResourceMonitor = ({
   icon,
-  iconCss = '',
   value,
   unit = '%',
   onClicked
@@ -37,13 +36,7 @@ export const ResourceMonitor = ({
           vpack: 'center',
           className: 'bar-resource-icon-container',
           homogeneous: true,
-          children: [
-            Widget.Icon({
-              icon,
-              css: iconCss,
-              className: 'bar-resource-icon'
-            })
-          ]
+          children: [icon]
         }),
         overlays: [resourceCircProg]
       })
@@ -65,7 +58,7 @@ export const ResourceMonitor = ({
 
 export const CPU = () =>
   ResourceMonitor({
-    icon: icons.system.cpu,
+    icon: FaIcon('microchip', 'sm'),
     value: cpu,
     onClicked: () => {
       Utils.execAsync([
@@ -78,7 +71,7 @@ export const CPU = () =>
 
 export const RAM = () =>
   ResourceMonitor({
-    icon: icons.system.ram,
+    icon: FaIcon('memory', 'xs'),
     value: ram,
     onClicked: () => {
       Utils.execAsync([
@@ -91,10 +84,9 @@ export const RAM = () =>
 
 export const Temp = () =>
   ResourceMonitor({
-    icon: temperatureIcon.bind(),
-    iconCss: 'margin-left: 4px',
+    icon: FaIcon(temperatureIcon.bind(), 'xs'),
     value: temperature,
-    unit: 'c',
+    unit: '°C',
     onClicked: () => {
       Utils.execAsync([
         'bash',

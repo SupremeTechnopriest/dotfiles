@@ -147,7 +147,7 @@ export const options = mkOptions(OPTIONS, {
   },
 
   font: {
-    size: opt(12),
+    size: opt(10),
     face: {
       title: opt('Gabarito'),
       main: opt('Inter'),
@@ -171,23 +171,29 @@ export const options = mkOptions(OPTIONS, {
   },
 
   bar: {
+    monitor: opt<number>(1),
     state: opt<'normal' | 'zen'>('normal'),
     position: opt<'top' | 'bottom'>('top'),
     corners: opt(50),
     transparent: opt(false),
     layout: {
-      start: opt<Array<BarWidget>>([]),
-      center: opt<Array<BarWidget>>(['workspaces']),
-      end: opt<Array<BarWidget>>([
+      start: opt<Array<BarWidget>>([
         'temp',
         'cpu',
         'ram',
+        'separator'
+        // 'colorpicker',
+        // 'screenshot',
+        // 'screenrecord'
+      ]),
+      center: opt<Array<BarWidget>>(['workspaces']),
+      end: opt<Array<BarWidget>>([
+        'weather',
+        'separator',
         'date',
         'separator',
         'expander',
         'tray',
-        // 'colorpicker',
-        // 'wallpaper',
         'indicators'
       ])
     },
@@ -227,5 +233,15 @@ export const options = mkOptions(OPTIONS, {
     fetchInterval: opt(1000),
     temperaturePath: opt('/sys/class/thermal/thermal_zone0/temp'),
     maxTemperature: opt(100)
+  },
+
+  weather: {
+    fetchInterval: opt(1000 * 60 * 15),
+    showCity: opt(true),
+    units: {
+      temperature: opt<'fahrenheit' | 'celcius'>('fahrenheit'),
+      wind: opt<'kmh' | 'mph' | 'ms' | 'kn'>('mph'),
+      precipitation: opt<'mm' | 'inch'>('inch')
+    }
   }
 })

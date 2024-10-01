@@ -1,12 +1,15 @@
+import { options } from '@/options'
 import { PanelButton } from '@/widget/bar/PanelButton'
+import { MaterialIcon } from '@/widget/common/MaterialIcon'
 import { screenrecord } from '@/service/screenrecord'
-import { icons } from '@/lib/icons'
 
-const Record = Widget.Icon(icons.screen.record)
+const Record = MaterialIcon('screen_record', 'md')
 
 const Recording = Widget.Box({
   children: [
-    Widget.Icon(icons.screen.recording),
+    MaterialIcon('stop_circle', 'md', {
+      className: 'text-error'
+    }),
     Widget.Label({
       label: screenrecord.bind('timer').as((time) => {
         const sec = time % 60
@@ -25,7 +28,15 @@ export const ScreenRecord = () =>
       screenrecord.bind('recording')
         ? screenrecord.stop()
         : screenrecord.start(),
-    child: Record
+    child: Widget.Stack({
+      transition: 'slide_up_down',
+      transitionDuration: options.transition.value,
+      children: {
+        false: Record,
+        true: Recording
+      } as Record<string, any>,
+      shown: screenrecord.bind('recording').as((enabled) => String(enabled))
+    })
   })
 
 export const ScreenRecording = () =>

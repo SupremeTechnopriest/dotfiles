@@ -10,15 +10,16 @@ const date = Utils.derive([clock, format.date], (c, f) => c.format(f) || '')
 export const Date = () =>
   PanelButton({
     window: 'datemenu',
+    flat: true,
     on_clicked: action.bind(),
     child: Widget.Box({
+      className: 'space-x-4',
       children: [
         Widget.Label({
           class_name: 'text-bold text-normal',
           justification: 'right',
           label: time.bind()
         }),
-        Separator(),
         Widget.Label({
           justification: 'right',
           label: date.bind()

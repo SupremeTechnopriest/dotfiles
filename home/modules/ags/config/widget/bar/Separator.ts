@@ -1,6 +1,8 @@
+import { FaIcon } from '@/widget/common/FaIcon'
+
 export const Separator = () =>
-  Widget.Label({
-    css: 'margin: 0 0.5rem; font-size: 14pt; margin-top: -4px',
+  Widget.Box({
+    css: 'margin: 0 0.5rem;',
     className: 'text-muted',
-    label: '•'
+    child: FaIcon('circle', 'xxs')
   })
