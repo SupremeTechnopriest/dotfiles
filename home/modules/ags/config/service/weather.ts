@@ -46,6 +46,7 @@ class Weather extends Service {
 
     const url = `https://weather.technopriest.dev?${params}`
     const text = await bash`curl "${url}"`
+    console.log(text)
     return JSON.parse(text)
   }
 
@@ -57,7 +58,6 @@ class Weather extends Service {
   constructor() {
     super()
 
-    this.update().catch(console.error)
     Utils.interval(fetchInterval.value, () => {
       this.update().catch(console.error)
     })
