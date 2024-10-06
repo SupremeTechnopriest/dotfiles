@@ -181,18 +181,19 @@ export const options = mkOptions(OPTIONS, {
         'temp',
         'cpu',
         'ram',
-        'separator'
-        // 'colorpicker',
-        // 'screenshot',
-        // 'screenrecord'
+        'separator',
+        'media'
       ]),
       center: opt<Array<BarWidget>>(['workspaces']),
       end: opt<Array<BarWidget>>([
+        'screenrecord',
+        'screenshot',
+        'colorpicker',
+        'separator',
         'weather',
         'separator',
         'date',
         'separator',
-        'expander',
         'tray',
         'indicators'
       ])

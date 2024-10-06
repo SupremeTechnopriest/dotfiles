@@ -1,4 +1,3 @@
-import type Gtk from '@/types/@girs/gtk-3.0/gtk-3.0'
 import type { ButtonProps } from '@/types/widgets/button'
 
 type PanelButtonProps = ButtonProps & {
@@ -43,14 +42,4 @@ export const PanelButton = ({
       if (setup) setup(self)
     },
     ...rest
-  })
-
-type ButtonGroupProps = {
-  children: Array<() => Gtk.Widget>
-}
-
-export const ButtonGroup = ({ children }: ButtonGroupProps) =>
-  Widget.Box({
-    className: 'button-group',
-    children: children.map((child) => child())
   })

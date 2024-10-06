@@ -3,14 +3,13 @@ import { options } from '@/options'
 import { Separator } from '@/widget/bar/Separator'
 import { Workspaces } from '@/widget/bar/modules/Workspaces'
 import { Date } from '@/widget/bar/modules/Date'
-// import { ThemeCycle } from '@/widget/bar/modules/Theme'
-import { WallpaperCycle } from '@/widget/bar/modules/Wallpaper'
 import { ColorPicker } from '@/widget/bar/modules/ColorPicker'
 import { CPU, RAM, Temp } from '@/widget/bar/modules/ResouceMonitor'
 import { ScreenRecord } from '@/widget/bar/modules/ScreenRecord'
 import { ScreenShot } from '@/widget/bar/modules/ScreenShot'
 import { Indicators } from '@/widget/bar/modules/Indicators'
 import { Weather } from '@/widget/bar/modules/Weather'
+import { Media } from '@/widget/bar/modules/Media'
 import { Tray } from '@/widget/bar/modules/Tray'
 
 const {
@@ -25,8 +24,6 @@ const widget = {
   separator: Separator,
   workspaces: Workspaces,
   date: Date,
-  // theme: ThemeCycle,
-  wallpaper: WallpaperCycle,
   colorpicker: ColorPicker,
   cpu: CPU,
   ram: RAM,
@@ -36,15 +33,24 @@ const widget = {
   tray: Tray,
   indicators: Indicators,
   weather: Weather,
+  media: Media,
   expander: () => Widget.Box({ expand: true })
 }
+
+export const Zen = (monitor: number) =>
+  Widget.Window({
+    monitor,
+    className: 'bar',
+    name: `bar-${monitor}`,
+    exclusivity: 'exclusive',
+    anchor: position.bind().as((pos) => [pos, 'right', 'left'])
+  })
 
 export const Bar = (monitor: number) =>
   Widget.Window({
     monitor,
     className: 'bar',
-    class_name: 'bar',
-    name: `bar${monitor}`,
+    name: `bar-${monitor}`,
     exclusivity: 'exclusive',
     anchor: position.bind().as((pos) => [pos, 'right', 'left']),
     child: Widget.CenterBox({

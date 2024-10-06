@@ -1,3 +1,5 @@
+import type { DrawingAreaProps } from '@/types/widgets/drawingarea'
+
 const { Gtk } = imports.gi
 
 // -- Styling --
@@ -10,14 +12,22 @@ const { Gtk } = imports.gi
 
 // -- Usage --
 // font size for progress value (0-100px) (hacky i know, but i want animations)
+
+interface CircularProgressProps extends DrawingAreaProps {
+  initFrom?: number
+  initTo?: number
+  initAnimTime?: number
+  initAnimPoints?: number
+}
+
 export const CircularProgress = ({
   initFrom = 0,
   initTo = 0,
   initAnimTime = 2900,
   initAnimPoints = 1,
-  extraSetup = () => {},
+  setup,
   ...rest
-}) =>
+}: CircularProgressProps) =>
   Widget.DrawingArea({
     ...rest,
     setup: (area) => {
@@ -57,8 +67,8 @@ export const CircularProgress = ({
           })
         }
       } else area.css = 'font-size: 0px;'
-      // @ts-expect-error
-      extraSetup(area)
+
+      if (setup) setup(area)
     },
     drawFn: (area, cr: any) => {
       const styleContext = area.get_style_context()

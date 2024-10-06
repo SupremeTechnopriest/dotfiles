@@ -123,3 +123,32 @@ $bar-ws-indicator-radius: 5px;
   font-size: 1.032rem;
   color: $subtle;
 }
+
+// Media
+
+.bar-media {
+  min-width: 10rem;
+  color: $primary;
+}
+
+.bar-media-playstate {
+  @include element_decel;
+  min-height: 1.77rem;
+  min-width: 1.77rem;
+  border-radius: 10rem;
+}
+
+.bar-media-progress {
+  @include fluent-decel-long;
+  min-width: 0.136rem; // line width
+  min-height: 1.636rem;
+  padding: 0;
+  margin-top: 0.1rem;
+  background-color: transparentize($primary, 0.8);
+  color: $primary;
+}
+
+.bar-media-text {
+  color: $subtle;
+  font-weight: bold;
+}

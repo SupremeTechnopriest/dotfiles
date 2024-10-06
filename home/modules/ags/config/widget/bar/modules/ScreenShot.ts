@@ -1,11 +1,10 @@
 import { PanelButton } from '@/widget/bar/PanelButton'
 import { screenrecord } from '@/service/screenrecord'
-import { icons } from '@/lib/icons'
-import { icon } from '@/lib/utils'
+import { MaterialIcon } from '@/widget/common/MaterialIcon'
 
 export const ScreenShot = () =>
   PanelButton({
     className: 'recorder',
     on_clicked: () => screenrecord.screenshot(),
-    child: Widget.Icon(icon(icons.screen.screenshot))
+    child: MaterialIcon('screenshot_region', 'md')
   })

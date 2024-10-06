@@ -37,10 +37,22 @@ $element-values: (box, revealer, stack, overlay);
       .space-x-#{$key} > #{$element}:last-child > * {
         margin-right: 0;
       }
+      .space-x-#{$key} > #{$element} {
+        margin-right: $value;
+      }
+      .space-x-#{$key} > #{$element}:last-child {
+        margin-right: 0;
+      }
       .space-y-#{$key} > #{$element} > * {
         margin-bottom: $value;
       }
       .space-y-#{$key} > #{$element}:last-child > * {
+        margin-bottom: 0;
+      }
+      .space-y-#{$key} > #{$element} {
+        margin-bottom: $value;
+      }
+      .space-y-#{$key} > #{$element}:last-child {
         margin-bottom: 0;
       }
     }

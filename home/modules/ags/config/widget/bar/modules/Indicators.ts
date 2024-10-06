@@ -32,8 +32,8 @@ export const NotificationIndicator = () => {
 
 const DNDIndicator = () =>
   Widget.Box({
+    visible: Notifications.bind('dnd'),
     child: MaterialIcon('notifications_off', 'md', {
-      visible: Notifications.bind('dnd'),
       className: 'text-muted'
     })
   })
@@ -188,7 +188,7 @@ export const Indicators = () =>
     on_scroll_up: () => (Audio.speaker.volume += 0.02),
     on_scroll_down: () => (Audio.speaker.volume -= 0.02),
     child: Widget.Box({
-      className: 'space-x-8',
+      className: 'space-x-4',
       children: [
         NotificationIndicator(),
         DNDIndicator(),

@@ -1,19 +1,16 @@
 @mixin button-focus() {
   box-shadow: inset 0 0 0 $border-width $border-color;
   background-color: $overlay;
-  // color: $primary;
 }
 
 @mixin button-hover() {
   box-shadow: inset 0 0 0 $border-width $border-color;
   background-color: $overlay;
-  // color: $primary;
 }
 
 @mixin button-active() {
   box-shadow: inset 0 0 0 $border-width $border-color;
   background-color: $hl-med;
-  // color: $primary;
 }
 
 @mixin button-disabled() {

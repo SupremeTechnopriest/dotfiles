@@ -1,6 +1,7 @@
 import { PanelButton } from '@/widget/bar/PanelButton'
 import { colorpicker } from '@/service/colorpicker'
 import Gdk from 'gi://Gdk'
+import { FaIcon } from '@/widget/common/FaIcon'
 
 const css = (color: string) => `
 * {
@@ -28,8 +29,7 @@ export const ColorPicker = () => {
 
   return PanelButton({
     class_name: 'color-picker',
-    child: Widget.Icon('color-select-symbolic'),
-    tooltip_text: colorpicker.bind('colors').as((v) => `${v.length} colors`),
+    child: FaIcon('eye-dropper', 'sm'),
     on_clicked: colorpicker.pick,
     on_secondary_click: (self) => {
       if (colorpicker.colors.length === 0) return
