@@ -10,7 +10,6 @@
   fonts.enable = true;
   themes.enable = true;
   btop.enable = true;
-  dunst.enable = false;
   neovim.enable = true;
   hyprland = {
     enable = true;
@@ -26,7 +25,6 @@
   starship.enable = true;
   swaylock.enable = false;
   rofi.enable = true;
-  waybar.enable = false;
   wlogout.enable = false;
   xdg.config.enable = true;
   gtk.config.enable = true;
@@ -57,6 +55,7 @@
     # Packages to install
     packages = with pkgs; [
       # Programs
+      fx
       audacity
       gthumb
       neofetch
@@ -71,6 +70,10 @@
       _1password-gui
 
       # Utilities
+      fx
+      vhs
+      glow
+      rsync
       mpc_cli
       playerctl
       slurp

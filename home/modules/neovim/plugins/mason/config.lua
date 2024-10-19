@@ -1,0 +1,31 @@
+require("mason").setup()
+
+require("mason-tool-installer").setup({
+	ensure_installed = {
+		"bash-language-server",
+		"cspell",
+		"css-lsp",
+		"helm-ls",
+		"html-lsp",
+		"htmx-lsp",
+		"json-lsp",
+		"lua-language-server",
+		"rust-analyzer",
+		"sqls",
+		"tailwindcss-language-server",
+		"typescript-language-server",
+		"yaml-language-server",
+		"zls",
+		"dockerfile-language-server",
+		"vim-language-server",
+		"eslint_d",
+		"markdownlint",
+		"prettier",
+		"quick-lint-js",
+		"stylua",
+	},
+	auto_update = true,
+	run_on_start = true,
+	start_delay = 3000,
+	debounce_hours = 5,
+})

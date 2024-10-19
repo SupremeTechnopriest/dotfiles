@@ -8,6 +8,12 @@
     # Nixpkgs
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    # Darwin
+    darwin = {
+      url = "github:lnl7/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Home-manager
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -21,6 +27,9 @@
     # Ags
     ags.url = "github:Aylur/ags";
     astal.url = "github:Aylur/astal";
+
+    # Zellij
+    zjstatus.url = "github:dj95/zjstatus";
 
     # Nixvim
     nixvim = {
@@ -43,4 +52,4 @@
     lib = import ./lib inputs;
 
   };
-}
+ }

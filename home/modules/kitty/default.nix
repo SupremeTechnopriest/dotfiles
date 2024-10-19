@@ -34,8 +34,8 @@ _: { config, lib, pkgs, ... }:
       # Keybindings
       keybindings = {
       	# Clipboard
-	"ctrl+c" = "copy_and_clear_or_interrupt";
-	"ctrl+v" = "paste_from_clipboard";
+        "ctrl+c" = "copy_and_clear_or_interrupt";
+        "ctrl+v" = "paste_from_clipboard";
 
         # Window management
         "ctrl+shift+enter" = "new_window";

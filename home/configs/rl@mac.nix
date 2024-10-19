@@ -7,18 +7,15 @@
 {
 
   # Custom modules
-  fonts.enable = true;
-  themes.enable = false;
   zsh.enable = true;
   starship.enable = true;
   kitty.enable = true;
   btop.enable = true;
+  zellij.enable = true;
   neovim.enable = true;
-  hyprland.enable = true;
-  ags.enable = true;
-  rofi.enable = true;
-  gtk.config.enable = true;
-  qt.config.enable = true;
+  neofetch.enable = true;
+  calcure.enable = true;
+  slack-term.enable = true;
   xdg.config.enable = true;
 
   home = {
@@ -30,10 +27,6 @@
     sessionVariables = {
 
       # Programs to use
-      MENU_CMD = "~/.config/rofi/scripts/launch-rofi.sh";
-      THEME_SELECT_CMD = "~/.config/rofi/scripts/themeselect-rofi.sh";
-      WALL_SELECT_CMD = "~/.config/rofi/scripts/wallselect-rofi.sh";
-      EXIT_CMD = "~/.config/wlogout/scripts/launch-wlogout.sh";
       BROWSER = "google-chrome-stable";
       EDITOR = "neovide";
       FILE = "ranger";
@@ -41,25 +34,25 @@
 
       # Other
       USER_LOGO = "~/.dotfiles/assets/rl.png";
-
-      # Hack for Hyprland 
-      MESA_GL_VERSION_OVERRIDE = "4.5";
-      MESA_GLSL_VERSION_OVERRIDE = "450";
     };
 
     # Packages to install
     packages = with pkgs; [
       # Programs
-      gthumb
       neofetch
       neovide
       _1password
 
+      # Languages  
+      bun
+      python3
+      go
+      zig
+
       # Utilities
-      mpc_cli
-      playerctl
-      slurp
-      wl-clipboard
+      fx
+      glow
+      vhs
     ];
   };
   

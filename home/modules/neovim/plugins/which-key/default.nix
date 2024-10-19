@@ -1,4 +1,8 @@
 
+# █░█░█ █░█ █ █▀▀ █░█   █▄▀ █▀▀ █▄█ 
+# ▀▄▀▄▀ █▀█ █ █▄▄ █▀█   █░█ ██▄ ░█░ 
+# Key Binding Hints
+
 { pkgs, ... }:
 
 {
@@ -7,6 +11,19 @@
       
       which-key = {
       	enable = true;
+
+        settings = {
+          plugins = {
+            presets = {
+              g = true;
+              z = true;
+              operators = true;
+              text_objects = true;
+              nav = true;
+              motions = true;
+            };
+          };
+        };
       };
 
     };

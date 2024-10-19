@@ -83,6 +83,7 @@ _: { config, lib, pkgs, ... }:
         # Configure additional directories
         extraConfig = {
           CODE_DIR = "$HOME/Code";
+          NOTES_DIR = "$HOME/Notes";
           XDG_SCREENSHOTS_DIR = "$HOME/Pictures/Screenshots";
         };
       };

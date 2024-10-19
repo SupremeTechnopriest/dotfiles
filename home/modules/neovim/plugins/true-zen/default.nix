@@ -1,10 +1,18 @@
 
+# ▀█▀ █▀█ █░█ █▀▀   ▀█ █▀▀ █▄░█ 
+# ░█░ █▀▄ █▄█ ██▄   █▄ ██▄ █░▀█ 
+# Zen Mode
+
 { pkgs, ... }:
 
 {
   programs.nixvim = {
-    plugins = {
 
-    };
+    extraPlugins = with pkgs.vimPlugins; [
+      true-zen-nvim
+    ];
+
+    extraConfigLua = builtins.readFile ./config.lua;
+
   };
 }

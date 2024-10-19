@@ -12,14 +12,6 @@ inputs : { config, lib, pkgs, ... }:
   config = lib.mkIf config.hyprland.enable {
 
     # Enable the hyprland module
-    # The NixOS module enables critical components needed to run Hyprland properly, such as:
-    # - polkit
-    # - xdg-desktop-portal-hyprland
-    # - graphics drivers
-    # - fonts
-    # - dconf
-    # - xwayland
-    # and adding a proper Desktop Entry to your Display Manager
     programs.hyprland = {
       enable = true;
       portalPackage = inputs.hyprland-portal.packages."${pkgs.stdenv.hostPlatform.system}".xdg-desktop-portal-hyprland;

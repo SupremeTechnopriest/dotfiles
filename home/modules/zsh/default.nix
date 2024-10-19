@@ -11,7 +11,6 @@ _: { config, lib, pkgs, ... }:
   # Install and configure zsh if desired
   config = lib.mkIf config.zsh.enable {
 
-    # Configure zsh shell
     programs.zsh = {
 
       # Enable zsh
@@ -19,20 +18,41 @@ _: { config, lib, pkgs, ... }:
 
       # Enable zsh features
       enableCompletion = true;
+      autosuggestion.enable = true;
       syntaxHighlighting.enable = true;
       enableVteIntegration = true;
 
       oh-my-zsh = {
         enable = true;
-        plugins = [ 
+        plugins = [
+          "aliases"
           "git"
-          "zsh-users/zsh-vi-mode"
-          "zsh-users/zsh-autosuggestions"
-          "zsh-users/zsh-syntax-highlighting"
+          "sudo"
+          "docker"
+          "kubectl"
+          "helm"
+          "minikube"
+          "bun"
+          "npm"
+          "postgres"
+          "rsync"
+          "safe-paste"
+          "ssh"
+          "stripe"
+          "kitty"
           "1password"
         ];
         theme = "robbyrussell";
       };
+
+      # Plugins
+      plugins = [
+        {
+          name = "vi-mode";
+          src = pkgs.zsh-vi-mode;
+          file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
+        }
+      ];
 
       # Configure shell aliases for zsh
       shellAliases = {
@@ -53,6 +73,8 @@ _: { config, lib, pkgs, ... }:
         # SSH
         rdsk = "ssh rl@dsk.local.com";
         rsrv = "ssh rl@srv.local.com";
+        # Zellij
+        zj = "zellij";
       };
 
     };

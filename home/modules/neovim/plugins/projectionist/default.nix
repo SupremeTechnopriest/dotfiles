@@ -1,10 +1,19 @@
 
+# █▀█ █▀█ █▀█ ░░█ █▀▀ █▀▀ ▀█▀ █ █▀█ █▄░█ █ █▀ ▀█▀ 
+# █▀▀ █▀▄ █▄█ █▄█ ██▄ █▄▄ ░█░ █ █▄█ █░▀█ █ ▄█ ░█░ 
+# Project File Alternates
+
+
 { pkgs, ... }:
 
 {
   programs.nixvim = {
-    plugins = {
 
-    };
+    extraPlugins = with pkgs.vimPlugins; [
+      vim-projectionist 
+    ]; 
+
+    extraConfigLua = builtins.readFile ./config.lua;
+
   };
 }

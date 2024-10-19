@@ -1,7 +1,7 @@
 
 # █▄░█ █▀▀ █▀█ █░█ █ █▀▄▀█ 
 # █░▀█ ██▄ █▄█ ▀▄▀ █ █░▀░█ 
-
+# Text Editor
 
 _: { config, lib, pkgs, ... }:
 
@@ -21,7 +21,10 @@ _: { config, lib, pkgs, ... }:
       globals = {
         # Leader
         mapleader = " ";
+        localleader = ",";
+      };
 
+      opts = {
         # Cursor
         cursorline = true;
         number = true;
@@ -49,12 +52,30 @@ _: { config, lib, pkgs, ... }:
         foldcolumn = "1";
         foldlevel = 99;
         foldlevelstart = 99;
+        fillchars = {
+          eob = " ";
+          fold = " ";
+          foldopen = "";
+          foldsep = " ";
+          foldclose = "";
+        };
+      };
 
+      performance = {
+        byteCompileLua = {
+          enable = true;
+          nvimRuntime = true;
+          plugins = true;
+        };
+
+        combinePlugins = {
+          enable = false;
+        };
       };
 
       colorschemes.catppuccin.enable = true;
       # colorschemes.catppuccin.flavour = "latte";
-      colorschemes.catppuccin.flavour = "mocha";
+      colorschemes.catppuccin.settings.flavour = "mocha";
 
       # colorschemes.rose-pine.enable = true;
       # colorschemes.tokyonight.enable = true;
@@ -65,27 +86,100 @@ _: { config, lib, pkgs, ... }:
   };
 
   imports = [
+    # Mini Modules
+    ./plugins/mini
+
+    # Bars 
+    ./plugins/barbar
+    ./plugins/lualine
+    ./plugins/modicator
+    ./plugins/statuscol
+
+    # File browsing
+    # ./plugins/neo-tree
+    ./plugins/oil
+    # ./plugins/projectionist
+
+    # Navigation
+    ./plugins/flash
+    ./plugins/harpoon
 
     # Dashboard splash screen
     ./plugins/dashboard
 
-    # File browsing
-    ./plugins/neo-tree
+    # LSP
+    ./plugins/lsp
+    ./plugins/mason
+    ./plugins/typescript-tools
+    ./plugins/conform-nvim
+    ./plugins/lint
+    ./plugins/dap
+    ./plugins/nix
+    ./plugins/helm
 
-    # Tabs
-    ./plugins/barbar
+    # Git
+    ./plugins/gitmoji
+    ./plugins/gitsigns
+    ./plugins/diffview
+    ./plugins/neogit
 
     # Auto completions
     ./plugins/cmp
 
+    # Treesitter
+    ./plugins/treesitter
+
+    # Telescope
+    ./plugins/telescope
+
+    # User Interface 
+    ./plugins/notify
+    ./plugins/noice
+
+    # Diagnostics
+    ./plugins/trouble
+
+    # Annotations
+    ./plugins/neogen
+
+    # Zen
+    ./plugins/true-zen
+    ./plugins/twilight
+
+    # History
+    ./plugins/undotree
+
+
     # Comments
-    ./plugins/comment
+    ./plugins/todo-comments
+    # ./plugins/bigcomment
 
-    # Status line
-    ./plugins/lualine
+    # Utilities
+    ./plugins/template-string
 
-    # Cursor line
-    ./plugins/cursorline
+    # Style
+    ./plugins/rainbow-delimiters
+
+    # Rich Presence
+    ./plugins/neocord
+
+    # Notes
+    ./plugins/neorg
+
+    # Projects
+    ./plugins/project-nvim
+
+    # Testing
+    ./plugins/neotest
+
+    # Folding
+    ./plugins/nvim-ufo
+
+    # Marks
+    ./plugins/marks
+
+    # Snippets
+    ./plugins/luasnip
 
     # Split manager
     ./plugins/smart-splits
@@ -93,8 +187,8 @@ _: { config, lib, pkgs, ... }:
     # Key hints
     ./plugins/which-key
 
-    # Command auto complete
-    ./plugins/wilder
+    # Markdown Tools
+    ./plugins/render-markdown
 
   ];
 
