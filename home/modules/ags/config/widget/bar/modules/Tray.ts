@@ -8,7 +8,6 @@ const { Gravity } = imports.gi.Gdk
 const SystemTray = await Service.import('systemtray')
 
 const SysTrayItem = (item: TrayItem) => {
-  console.log(item)
   return item.id !== null
     ? Button({
         className: 'bar-systray-item',

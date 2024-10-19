@@ -1,15 +1,15 @@
 @mixin button-focus() {
-  box-shadow: inset 0 0 0 $border-width $border-color;
+  // box-shadow: inset 0 0 0 $border-width $border-color;
   background-color: $overlay;
 }
 
 @mixin button-hover() {
-  box-shadow: inset 0 0 0 $border-width $border-color;
+  // box-shadow: inset 0 0 0 $border-width $border-color;
   background-color: $overlay;
 }
 
 @mixin button-active() {
-  box-shadow: inset 0 0 0 $border-width $border-color;
+  // box-shadow: inset 0 0 0 $border-width $border-color;
   background-color: $hl-med;
 }
 
@@ -36,7 +36,7 @@
     box-shadow: none;
   } @else {
     background-color: $surface;
-    box-shadow: inset 0 0 0 $border-width $border-color;
+    // box-shadow: inset 0 0 0 $border-width $border-color;
   }
 
   @if $reactive {

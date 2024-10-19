@@ -58,14 +58,13 @@
     packages = with pkgs; [
       # Programs
       audacity
-      discord
       gthumb
       neofetch
       neovide
       libresprite
       obsidian
       slack
-      vesktop
+      webcord
       postman
       google-chrome
       _1password

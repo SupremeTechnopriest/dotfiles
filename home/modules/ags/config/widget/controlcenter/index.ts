@@ -2,6 +2,7 @@ import { PopupWindow } from '@/widget/PopupWindow'
 import { options } from '@/options'
 
 import { Header } from './modules/Header'
+import { SidebarWindow } from '../SidebarWindow'
 
 const layout = Utils.derive(
   [options.bar.position, options.controlCenter.position],
@@ -15,18 +16,18 @@ const Content = () =>
     css: 'min-width: 2px;',
     children: [
       Widget.EventBox({
-        onPrimaryClick: () => App.closeWindow('sideright'),
-        onSecondaryClick: () => App.closeWindow('sideright'),
-        onMiddleClick: () => App.closeWindow('sideright')
+        onPrimaryClick: () => App.closeWindow('controlcenter'),
+        onSecondaryClick: () => App.closeWindow('controlcenter'),
+        onMiddleClick: () => App.closeWindow('controlcenter')
       }),
       Widget.Box({
         vertical: true,
         vexpand: true,
-        className: 'control-center spacing-v-15',
+        className: 'control-center space-y-8',
         children: [
           Widget.Box({
             vertical: true,
-            className: 'spacing-v-5',
+            className: 'space-y-4',
             children: [Header]
           })
           // Widget.Box({
@@ -50,18 +51,33 @@ const Content = () =>
     // })
   })
 
+// const ControlCenter = () =>
+//   PopupWindow({
+//     name: 'controlcenter',
+//     // exclusivity: 'ignore',
+//     anchor: ['right', 'top', 'bottom'],
+//     layer: 'overlay',
+//     transition: options.controlCenter.position
+//       .bind()
+//       .as((pos) => (pos === 'right' ? 'slide_left' : 'slide_right')),
+//     layout: layout.value,
+//     child: Widget.Box({
+//       children: [Content()]
+//     })
+//   })
+
 const ControlCenter = () =>
-  PopupWindow({
-    name: 'controlcenter',
-    exclusivity: 'ignore',
+  SidebarWindow({
+    keymode: 'on-demand',
     anchor: ['right', 'top', 'bottom'],
+    name: 'controlcenter',
+    // className: 'control-center',
     layer: 'overlay',
-    transition: options.controlCenter.position
-      .bind()
-      .as((pos) => (pos === 'right' ? 'slide_left' : 'slide_right')),
-    layout: layout.value,
     child: Widget.Box({
-      children: [Content()]
+      children: [
+        // clickCloseRegion({ name: 'sideright', multimonitor: false, fillMonitor: 'horizontal' }),
+        Content()
+      ]
     })
   })
 

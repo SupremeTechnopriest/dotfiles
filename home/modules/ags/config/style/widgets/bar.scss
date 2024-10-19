@@ -29,12 +29,6 @@ $bar-ws-indicator-radius: 5px;
   transition: $transition;
   background-color: $base;
 
-  .button-group {
-    background-color: $hl-low;
-    border-radius: $button-radius;
-    margin: 3px;
-  }
-
   .panel-button {
     @include panel-button;
 
@@ -151,4 +145,10 @@ $bar-ws-indicator-radius: 5px;
 .bar-media-text {
   color: $subtle;
   font-weight: bold;
+}
+
+// Title
+
+.bar-title {
+  min-width: 10rem;
 }

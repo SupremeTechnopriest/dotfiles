@@ -4,6 +4,7 @@ import { opt, mkOptions } from '@/lib/option'
 // import icons from '@/lib/icons'
 
 import type { BarWidget } from '@/widget/bar/Bar'
+import type { Variable } from './types/variable'
 
 type Theme =
   | 'monokai'
@@ -137,7 +138,7 @@ export const options = mkOptions(OPTIONS, {
     widget: { opacity: opt(94) },
     border: {
       width: opt(1),
-      opacity: opt(96)
+      opacity: opt(0)
     },
 
     shadows: opt(true),
@@ -158,6 +159,13 @@ export const options = mkOptions(OPTIONS, {
 
   transition: opt(200),
 
+  time: {
+    format: {
+      time: opt('%I:%M'),
+      date: opt('%A, %m/%d')
+    }
+  },
+
   notifications: {
     position: opt<Array<'top' | 'bottom' | 'left' | 'right'>>(['top', 'right']),
     blacklist: opt(['Spotify']),
@@ -171,32 +179,40 @@ export const options = mkOptions(OPTIONS, {
   },
 
   bar: {
-    monitor: opt<number>(1),
-    state: opt<'normal' | 'zen'>('normal'),
+    monitor: opt(1),
+    zen: opt(false),
     position: opt<'top' | 'bottom'>('top'),
     corners: opt(50),
     transparent: opt(false),
     layout: {
-      start: opt<Array<BarWidget>>([
-        'temp',
-        'cpu',
-        'ram',
-        'separator',
-        'media'
-      ]),
-      center: opt<Array<BarWidget>>(['workspaces']),
-      end: opt<Array<BarWidget>>([
-        'screenrecord',
-        'screenshot',
-        'colorpicker',
-        'separator',
-        'weather',
-        'separator',
-        'date',
-        'separator',
-        'tray',
-        'indicators'
-      ])
+      normal: {
+        start: opt<Array<BarWidget>>([
+          'title',
+          'temp',
+          'cpu',
+          'ram',
+          'separator',
+          'media'
+        ]),
+        center: opt<Array<BarWidget>>(['workspaces']),
+        end: opt<Array<BarWidget>>([
+          'screenrecord',
+          'screenshot',
+          'colorpicker',
+          'separator',
+          'weather',
+          'separator',
+          'date',
+          'separator',
+          // 'tray',
+          'indicators'
+        ])
+      },
+      zen: {
+        start: opt<Array<BarWidget>>(['title']),
+        center: opt<Array<BarWidget>>(['workspaces']),
+        end: opt<Array<BarWidget>>(['date'])
+      }
     },
 
     date: {

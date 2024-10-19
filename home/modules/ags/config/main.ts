@@ -6,11 +6,12 @@ import { init } from '@/lib/init'
 import { Bar } from '@/widget/bar/Bar'
 import { ScreenCorners } from '@/widget/bar/ScreenCorners'
 import { FauxCorner } from '@/widget/desktop/FauxCorner'
-// import { setupControlCenter } from '@/widget/controlcenter'
+import { Indicators } from '@/widget/indicators'
+import { setupControlCenter } from '@/widget/controlcenter'
 
 App.config({
   onConfigParsed: () => {
-    // setupControlCenter()
+    setupControlCenter()
     // setupQuickSettings()
     // setupDateMenu()
     init()
@@ -19,7 +20,8 @@ App.config({
     controlcenter: options.transition.value
   },
   windows: () => [
-    ...forMonitors(Bar),
+    Bar(),
+    ...forMonitors(Indicators),
     ...forMonitors(ScreenCorners),
     ...(options.appearance.screenRounding.value
       ? [

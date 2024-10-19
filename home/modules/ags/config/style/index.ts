@@ -58,8 +58,6 @@ const variables = () => [
   $('font-title', options.font.face.title),
   $('font-main', options.font.face.main),
   $('font-reading', options.font.face.reading),
-  $('font-icon', options.font.face.icon),
-  $('font-nerd', options.font.face.nerd),
   $('font-mono', options.font.face.mono),
 
   $('scheme', scheme),
@@ -69,6 +67,7 @@ const variables = () => [
   $('transition', `${options.transition}ms`),
 
   $('shadows', `${shadows}`),
+
   $('border-width', `${border.width}px`),
   $(
     'border-color',

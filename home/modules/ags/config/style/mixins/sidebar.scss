@@ -1,0 +1,12 @@
+@mixin sidebar {
+  border-radius: $radius;
+  background-color: $base;
+  border: $border;
+
+  padding: 1rem;
+  margin: $spacing / 2;
+}
+
+.sidebar {
+  @include sidebar;
+}

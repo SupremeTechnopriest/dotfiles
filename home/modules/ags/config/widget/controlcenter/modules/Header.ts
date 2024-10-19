@@ -1,5 +1,6 @@
 import { icons } from '@/lib/icons'
 import { uptime } from '@/lib/variables'
+import GLib from 'gi://GLib'
 
 const Hyprland = await Service.import('hyprland')
 
@@ -10,7 +11,7 @@ export const ModuleReloadIcon = (props = {}) =>
     tooltipText: 'Reload Environment config',
     onClicked: () => {
       Hyprland.messageAsync('reload')
-      App.closeWindow('sideright')
+      App.closeWindow('controlcenter')
     },
     child: Widget.Icon(icons.ui.refresh)
   })
@@ -19,7 +20,7 @@ export const Header = Widget.Box({
   className: 'spacing-h-10 sidebar-group-invisible-morehorizpad',
   children: [
     Widget.Icon({
-      icon: icons.nix.nix,
+      icon: GLib.getenv('USER_LOGO')!,
       className: 'txt txt-larger'
     }),
     Widget.Label({
