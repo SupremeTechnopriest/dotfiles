@@ -1,0 +1,6 @@
+--dir=./home
+--target=~
+--ignore=.stowrc
+--ignore=.DS_Store
+--ignore=nix
+--ignore=scripts

@@ -1,0 +1,156 @@
+# Reference: https://github.com/i3/i3/blob/next/etc/config
+
+enable-normalization-flatten-containers = false
+enable-normalization-opposite-orientation-for-nested-containers = false
+
+[mode.main.binding]
+alt-enter = 'exec-and-forget open -n ~/Applications/iTerm.app'
+
+alt-j = 'focus left'
+alt-k = 'focus down'
+alt-l = 'focus up'
+alt-semicolon = 'focus right'
+
+alt-shift-j = 'move left'
+alt-shift-k = 'move down'
+alt-shift-l = 'move up'
+alt-shift-semicolon = 'move right'
+
+alt-h = 'split horizontal'
+alt-v = 'split vertical'
+
+alt-f = 'fullscreen'
+
+alt-s = 'layout v_accordion' # 'layout stacking' in i3
+alt-w = 'layout h_accordion' # 'layout tabbed' in i3
+alt-e = 'layout tiles horizontal vertical' # 'layout toggle split' in i3
+
+alt-shift-space = 'layout floating tiling' # 'floating toggle' in i3
+
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-5 = 'workspace 5'
+alt-6 = 'workspace 6'
+alt-7 = 'workspace 7'
+alt-8 = 'workspace 8'
+alt-9 = 'workspace 9'
+alt-0 = 'workspace 10'
+
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-shift-5 = 'move-node-to-workspace 5'
+alt-shift-6 = 'move-node-to-workspace 6'
+alt-shift-7 = 'move-node-to-workspace 7'
+alt-shift-8 = 'move-node-to-workspace 8'
+alt-shift-9 = 'move-node-to-workspace 9'
+alt-shift-0 = 'move-node-to-workspace 10'
+
+alt-shift-c = 'reload-config'
+
+alt-r = 'mode resize'
+
+[mode.resize.binding]
+h = 'resize width -50'
+j = 'resize height +50'
+k = 'resize height -50'
+l = 'resize width +50'
+enter = 'mode main'
+esc = 'mode main'
+
+# Window Arrangement
+
+# Default floating
+[[on-window-detected]]
+check-further-callbacks = true
+run = 'layout floating'
+
+# Finder always floating
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+if.during-aerospace-startup = false 
+run = 'layout floating'
+
+# Home always floating
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+if.during-aerospace-startup = false 
+run = 'layout floating'
+
+# Arc Main
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.browser'
+if.during-aerospace-startup = true
+check-further-callbacks = true
+run = ['layout tiling', 'move-node-to-workspace 1']
+
+# Arc Popups
+[[on-window-detected]]
+if.app-id = 'company.thebrowser.browser'
+if.during-aerospace-startup = false 
+check-further-callbacks = true
+run = 'layout floating'
+
+# iTerm2
+[[on-window-detected]]
+if.app-id = 'com.googlecode.iterm2'
+if.during-aerospace-startup = true
+run = ['layout tiling', 'move-node-to-workspace 2']
+
+# WebStorm
+[[on-window-detected]]
+if.app-id = 'com.jetbrains.WebStorm'
+if.during-aerospace-startup = false
+run = ['layout tiling', 'move-node-to-workspace 3']
+
+# Discord
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
+if.during-aerospace-startup = false 
+run = ['layout tiling', 'move-node-to-workspace 4']
+
+# Slack
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+if.during-aerospace-startup = false 
+run = ['layout tiling', 'move-node-to-workspace 5']
+
+# Mail 
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+if.during-aerospace-startup = false 
+run = ['layout tiling', 'move-node-to-workspace 6']
+
+# Calendar
+[[on-window-detected]]
+if.app-id = 'com.apple.iCal'
+if.during-aerospace-startup = false 
+run = ['layout tiling', 'move-node-to-workspace 6']
+
+# Music
+[[on-window-detected]]
+if.app-id = 'com.apple.Music'
+if.during-aerospace-startup = false 
+run = ['layout tiling', 'move-node-to-workspace 7']
+
+# Obsidian
+[[on-window-detected]]
+if.app-id = 'md.obsidian'
+if.during-aerospace-startup = false 
+run = ['layout tiling', 'move-node-to-workspace 8']
+
+# Chrome
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+if.during-aerospace-startup = false 
+run = ['layout tiling', 'move-node-to-workspace 9']
+
+# ChatGPT
+[[on-window-detected]]
+if.app-id = 'com.openai.chat'
+if.during-aerospace-startup = false 
+run = ['layout tiling', 'move-node-to-workspace 10']
+

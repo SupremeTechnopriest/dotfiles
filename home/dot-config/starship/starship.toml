@@ -1,0 +1,231 @@
+continuation_prompt = "▶▶"
+format = """
+$time\
+$username\
+$hostname\
+$localip\
+$shlvl\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$docker_context\
+$package\
+$c\
+$cmake\
+$deno\
+$dotnet\
+$golang\
+$haxe\
+$helm\
+$java\
+$lua\
+$nodejs\
+$php\
+$python\
+$rust\
+$swift\
+$terraform\
+$vlang\
+$zig\
+$memory_usage\
+$gcloud\
+$kubernetes\
+$env_var\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$directory\
+$jobs\
+$battery\
+$status\
+$container\
+$character"""
+
+[username]
+style_user = 'white bold'
+style_root = 'black bold'
+format = '- [$user]($style)'
+disabled = false
+show_always = true
+
+[time]
+disabled = false
+use_12hr = true
+format = '[$time]($style) '
+time_format = '%r'
+utc_time_offset = 'local'
+
+[[battery.display]]
+threshold = 10
+style = 'bold red'
+
+[[battery.display]]
+threshold = 30
+style = 'bold yellow'
+
+[character]
+success_symbol = "[>](bold green)"
+error_symbol = "[x](bold red)"
+vimcmd_symbol = "[<](bold green)"
+
+[git_branch]
+symbol = "git "
+format = "- [$symbol$branch(:$remote_branch)]($style) "
+
+[git_commit]
+tag_symbol = " tag "
+
+[git_status]
+ahead = ">"
+behind = "<"
+diverged = "<>"
+renamed = "r"
+deleted = "x"
+
+[localip]
+ssh_only = false
+format = '[@$localipv4](dimmed 8) '
+disabled = false
+
+[bun]
+symbol = "bun "
+
+[c]
+symbol = "C "
+
+[cmake]
+symbol = "cmake "
+
+[deno]
+symbol = "deno "
+
+[dotnet]
+symbol = ".NET "
+
+[directory]
+read_only = " ro"
+truncation_length = 8
+truncation_symbol = ''
+
+[docker_context]
+symbol = "docker "
+
+[golang]
+symbol = "go "
+
+[gcloud]
+symbol = '️gcloud'
+format = '- [$symbol:([$region](bold italic #6e8bdb)) $account(@$domain):([$project](bold italic #6e8bdb))](27) '
+
+[gcloud.region_aliases]
+us-central1 = 'usc1'
+us-east1 = 'use1'
+
+[gcloud.project_aliases]
+edgemesh-145516 = 'edgemesh'
+
+[helm]
+symbol = "helm "
+
+[hostname]
+ssh_only = true
+ssh_symbol = ':'
+format = '[$ssh_symbol$hostname]($style)'
+
+[java]
+symbol = "java "
+
+[kubernetes]
+format = '- [k8s $context](green) '
+disabled = false
+
+[[kubernetes.contexts]]
+context_pattern = 'docker-desktop'
+context_alias = 'dev'
+
+[[kubernetes.contexts]]
+context_pattern = 'gke_edgemesh-145516_us-central1-a_canary'
+context_alias = 'canary'
+
+[[kubernetes.contexts]]
+context_pattern = 'gke_edgemesh-145516_us-central1-a_stable'
+context_alias = 'stable'
+
+[lua]
+symbol = "lua "
+
+[nodejs]
+symbol = "nodejs"
+format = "- [$symbol $version]($style) "
+
+[memory_usage]
+symbol = "memory "
+
+[os.symbols]
+Alpine = "alp "
+Amazon = "amz "
+Android = "andr "
+Arch = "rch "
+CentOS = "cent "
+Debian = "deb "
+DragonFly = "dfbsd "
+Emscripten = "emsc "
+EndeavourOS = "ndev "
+Fedora = "fed "
+FreeBSD = "fbsd "
+Garuda = "garu "
+Gentoo = "gent "
+HardenedBSD = "hbsd "
+Illumos = "lum "
+Linux = "lnx "
+Macos = "mac "
+Manjaro = "mjo "
+Mariner = "mrn "
+MidnightBSD = "mid "
+Mint = "mint "
+NetBSD = "nbsd "
+NixOS = "nix "
+OpenBSD = "obsd "
+openSUSE = "osuse "
+OracleLinux = "orac "
+Pop = "pop "
+Raspbian = "rasp "
+Redhat = "rhl "
+RedHatEnterprise = "rhel "
+Redox = "redox "
+Solus = "sol "
+SUSE = "suse "
+Ubuntu = "ubnt "
+Unknown = "unk "
+Windows = "win "
+
+[package]
+symbol = "pkg"
+format = "- [$symbol $version]($style) "
+
+[php]
+symbol = "php "
+
+[python]
+symbol = "py "
+
+[rust]
+symbol = "rs "
+
+[sudo]
+symbol = "sudo "
+
+[swift]
+symbol = "swift "
+
+[terraform]
+symbol = "terraform "
+
+[zig]
+symbol = "zig "
+
+[vlang]
+symbol = "vlang "
