@@ -14,8 +14,7 @@ return {
 				{
 					pane = 2,
 					section = "terminal",
-					cmd = "echo 'booty'",
-					-- cmd = "colorscript -e square",
+					cmd = "colorscript -e square",
 					height = 5,
 					padding = 1,
 				},
