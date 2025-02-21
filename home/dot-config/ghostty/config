@@ -1,7 +1,7 @@
 window-theme = system
 window-decoration = none
-background-opacity = 0.8
-background-blur-radius = 20
+background-opacity = 1
+background-blur-radius = 0
 theme = tokyonight
 bold-is-bright = true
 background = #1a1b26
