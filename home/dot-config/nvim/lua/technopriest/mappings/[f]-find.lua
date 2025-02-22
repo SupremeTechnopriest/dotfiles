@@ -10,6 +10,7 @@ require("which-key").add({
 	{ "<leader>ff", "<cmd>Telescope find_files<CR>", desc = "Files" },
 	{ "<leader>fg", "<cmd>Telescope git_files<CR>", desc = "Git Files" },
 	{ "<leader>fs", "<cmd>Telescope live_grep<CR>", desc = "Search" },
+	{ "<leader>fp", "<cmd>Telescope project<CR>", desc = "Project" },
 	{ "<leader>fm", "<cmd>Telescope marks<CR>", desc = "Marks" },
 	{
 		"s",

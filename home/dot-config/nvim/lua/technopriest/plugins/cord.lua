@@ -36,29 +36,36 @@ return {
 			enable = true, -- Enable idle status
 			show_status = true, -- Display idle status, disable to hide the rich presence on idle
 			timeout = 300000, -- Timeout in milliseconds after which the idle status is set, 0 to display immediately
-			disable_on_focus = false, -- Do not display idle status when neovim is focused
+			disable_on_focus = true, -- Do not display idle status when neovim is focused
 			text = "Idle", -- Text to display when idle
 			tooltip = "💤", -- Text to display when hovering over the idle image
+			details = function(opts)
+				return "Taking a break from " .. opts.workspace
+			end,
 		},
 		text = {
-			viewing = "Viewing {}", -- Text to display when viewing a readonly file
-			editing = "Editing {}", -- Text to display when editing a file
-			file_browser = "Browsing files in {}", -- Text to display when browsing files (Empty string to disable)
-			plugin_manager = "Managing plugins in {}", -- Text to display when managing plugins (Empty string to disable)
-			lsp_manager = "Configuring LSP in {}", -- Text to display when managing LSP servers (Empty string to disable)
-			vcs = "Committing changes in {}", -- Text to display when using Git or Git-related plugin (Empty string to disable)
-			workspace = "Workspace: {}", -- Text to display when in a workspace (Empty string to disable)
+			workspace = function(opts)
+				local hour = tonumber(os.date("%H"))
+				local status = hour >= 22 and "🌙 Late night coding"
+					or hour >= 18 and "🌆 Evening session"
+					or hour >= 12 and "☀️ Afternoon coding"
+					or hour >= 5 and "🌅 Morning productivity"
+					or "🌙 Midnight hacking"
+
+				return status .. ": " .. opts.workspace
+			end,
 		},
-		buttons = {
-			{
-				label = "Github",
-				url = "https://github.com/supremetechnopriest",
-			},
-			{
-  			label = "Edgemesh",
-				url = "https://edgemesh.com",
-			},
-		},
+		-- buttons = {
+		-- 	{
+		-- 		label = "Github",
+		-- 		url = "https://github.com/supremetechnopriest",
+		-- 	},
+		-- 	{
+		-- 		label = "Edgemesh",
+		-- 		url = "https://edgemesh.com",
+		-- 	},
+		-- },
 		assets = nil,
+		variables = true,
 	},
 }

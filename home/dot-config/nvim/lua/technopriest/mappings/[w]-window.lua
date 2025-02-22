@@ -14,6 +14,9 @@ require("which-key").add({
 	-- Files (Oil)
 	{ "<leader>wf", "<cmd>Oil<CR>", desc = "Todos" },
 
+	-- Database
+	{ "<leader>wd", "<cmd>DBUI<CR>", desc = "Database" },
+
 	-- Diagnostics
 	{ "<leader>wp", group = "Diagnostics" },
 	{ "<leader>wpp", "<cmd>TroubleToggle workspace_diagnostics<CR>", desc = "Project" },

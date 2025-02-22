@@ -8,7 +8,7 @@ local conform = require("conform")
 local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
 
 wk.add({
-	{ ".", ts_repeat_move.repeat_last_move_next, desc = "Repeat move next", mode = { "n", "x", "o" } },
+	{ ";", ts_repeat_move.repeat_last_move_next, desc = "Repeat move next", mode = { "n", "x", "o" } },
 	{ ",", ts_repeat_move.repeat_last_move_prev, desc = "Repeat move prev", mode = { "n", "x", "o" } },
 })
 

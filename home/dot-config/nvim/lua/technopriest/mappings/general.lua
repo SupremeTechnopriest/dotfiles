@@ -5,6 +5,7 @@
 require("which-key").add({
 	{ "Q", "<nop>", mode = { "n" }, hidden = true },
 	{ "<C-c>", "<Esc>", mode = { "i" }, hidden = true },
+	{ "<Esc><Esc>", "<cmd>NoiceDismiss<CR>", desc = "Dismiss notifications" },
 	{ "<leader>s", "<cmd>w<CR>", desc = "Save" },
 	{ "<leader>d", '"_d', desc = "Delete preserve", mode = { "n", "v" } },
 	{ "<leader>y", '"+y', desc = "System copy before", mode = { "n", "v" } },

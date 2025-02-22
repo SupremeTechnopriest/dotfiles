@@ -75,6 +75,7 @@ plugins=(
   nvm
   npm
   qrcode
+  vi-mode
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -98,6 +99,8 @@ alias vim="nvim"
 alias zshconfig="vim ~/.zshrc"
 alias zshso="source ~/.zshrc"
 alias ohmyzsh="vim ~/.oh-my-zsh"
+alias xcopy="xclip -selection clipboard"
+alias xpaste="xclip -selection clipboard -o"
 alias tx="tmuxifier"
 alias txl="~/.config/bin/tmuxifier-load-selected.sh"
 alias txa="~/.config/bin/tmuxifier-load-all.sh"
