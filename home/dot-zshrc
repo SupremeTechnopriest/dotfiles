@@ -94,6 +94,10 @@ export LANG=en_US.UTF-8
 # Editor
 export EDITOR='nvim'
 
+# Vi Mode
+VI_MODE_SET_CURSOR=true
+VI_MODE_RESET_PROMPT_ON_MODE_CHANGE=false
+
 # Aliases
 alias vim="nvim"
 alias zshconfig="vim ~/.zshrc"
@@ -112,6 +116,7 @@ alias tree="eza --tree"
 alias cat="bat"
 alias z="zoxide"
 alias zz="z -"
+alias zj="zellij"
 
 # Directories
 alias cdp="cd ~/Code/projects"

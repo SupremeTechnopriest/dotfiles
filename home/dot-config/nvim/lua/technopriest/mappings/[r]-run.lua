@@ -2,6 +2,8 @@
 -- █▀▄ █▄█ █░▀█
 -- Run Things
 
+local kulala = require("kulala")
+
 require("which-key").add({
 	{ "<leader>R", group = "Run" },
 	{ "<leader>Rt", group = "Run Test" },

@@ -20,6 +20,7 @@
   "gitsigns.nvim": { "branch": "main", "commit": "4c40357994f386e72be92a46f41fc1664c84c87d" },
   "harpoon": { "branch": "harpoon2", "commit": "ed1f853847ffd04b2b61c314865665e1dadf22c7" },
   "img-clip.nvim": { "branch": "main", "commit": "5ded6f468d633ccfb315905fe8901d6c95ae8f29" },
+  "kulala.nvim": { "branch": "main", "commit": "3d7902b83a6334482c65d6204b41a3d2b1344aa5" },
   "lazy.nvim": { "branch": "main", "commit": "e5e9bf48211a13d9ee6c1077c88327c49c1ab4a0" },
   "lua-utils.nvim": { "branch": "main", "commit": "e565749421f4bbb5d2e85e37c3cef9d56553d8bd" },
   "lualine.nvim": { "branch": "master", "commit": "f4f791f67e70d378a754d02da068231d2352e5bc" },

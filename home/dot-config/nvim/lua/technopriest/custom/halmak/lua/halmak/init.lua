@@ -3,8 +3,12 @@ local M = {}
 local enabled = false
 
 function M.toggle()
-	enabled = enabled and false or true
-	print("Halmak" .. enabled and "enabled" or "disabed")
+	enabled = not enabled
+	vim.api.nvim_exec_autocmds("User", {
+		pattern = "HalmakToggle",
+		data = { enabled = enabled },
+	})
+	print("Halmak " .. (enabled and "enabled" or "disabled"))
 end
 
 function M.enabled()
@@ -20,7 +24,12 @@ function M.setup(opts)
 	if opts.defaultEnabled then
 		enabled = true
 	end
+	vim.api.nvim_create_augroup("Halmak", { clear = true })
 	vim.api.nvim_command('command! HalmakToggle lua require("halmak").toggle()')
+	vim.api.nvim_exec_autocmds("User", {
+		pattern = "HalmakToggle",
+		data = { enabled = enabled },
+	})
 end
 
 return M

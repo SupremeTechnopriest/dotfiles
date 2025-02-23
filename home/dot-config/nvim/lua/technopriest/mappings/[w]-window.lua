@@ -12,7 +12,7 @@ require("which-key").add({
 	{ "<leader>w", group = "Window" },
 
 	-- Files (Oil)
-	{ "<leader>wf", "<cmd>Oil<CR>", desc = "Todos" },
+	{ "<leader>wf", "<cmd>Oil<CR>", desc = "File Browser" },
 
 	-- Database
 	{ "<leader>wd", "<cmd>DBUI<CR>", desc = "Database" },
